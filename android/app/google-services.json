@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1083133648763",
+    "project_id": "bbills-df903",
+    "storage_bucket": "bbills-df903.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083133648763:android:0b7fc9ce0a1cb2d6a127de",
+        "android_client_info": {
+          "package_name": "in30days.bharatbills"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083133648763-lj4k1phsn6lip6thoaireapva4j9kc2d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in30days.bharatbills",
+            "certificate_hash": "493e90a914fc972c6fd51d3910e344e35c0689cb"
+          }
+        },
+        {
+          "client_id": "1083133648763-ppsfs7ak8psri864m664fkoab6a6f2d8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in30days.bharatbills",
+            "certificate_hash": "25bc4f45e5c854f4cbc664d73782b4a191914f23"
+          }
+        },
+        {
+          "client_id": "1083133648763-c8c1cjfkvs5ek9rp03dnjdc7a4uth2nb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBndubwHkghszeZwm0j7E828XN_9HiU6DU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083133648763-c8c1cjfkvs5ek9rp03dnjdc7a4uth2nb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

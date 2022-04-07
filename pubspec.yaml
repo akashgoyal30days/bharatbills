@@ -1,0 +1,183 @@
+name: bbills
+description: A new Flutter application.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 3.0.8+51
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+
+  cupertino_icons: ^1.0.2
+  carousel_slider: ^4.0.0
+  google_fonts:
+  animated_text_kit: ^4.2.1
+  http: ^0.12.2
+  flushbar:
+  overlay_support:
+  shared_preferences:
+  marquee: ^2.2.0
+  flutter_staggered_animations: "^1.0.0"
+  syncfusion_flutter_charts: ^19.3.55
+  page_transition: ^2.0.4
+  flutter_downloader: ^1.7.0
+  downloads_path_provider_28: ^0.1.2
+  path_provider:
+  path: ^1.6.4
+  open_file: ^3.0.1
+  flutter_local_notifications: ^1.3.0
+  dio:
+  permission_handler: ^4.4.0+hotfix.2
+  intl:
+  bluetooth_print:
+  flutter_full_pdf_viewer: ^1.0.4
+  whatsapp_share: ^1.1.1
+  printing:
+  blurrycontainer: ^0.0.1
+  webview_flutter:
+  flutter_html_to_pdf: ^0.7.0
+  flutter_phone_direct_caller: ^2.1.0
+  flutter_open_whatsapp: ^0.1.2
+  dropdown_search: ^2.0.1
+  popover: ^0.2.6+3
+  zoom_widget: ^0.2.1
+  #camera: ^0.5.7+2
+  image_picker: ^0.6.6+5
+  flutter_contacts: ^1.1.1+2
+  mime: ^1.0.1
+  http_parser:
+  change_app_package_name: ^1.0.0
+  google_sign_in: ^5.2.3
+  flutter_screenutil: ^5.1.0
+  otp_text_field: ^1.1.2
+  image_cropper: ^1.4.1
+  url_launcher:
+  font_awesome_flutter: ^9.2.0
+  get_version: ^0.2.2
+  new_version: ^0.0.5
+
+
+
+
+
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/
+    - assets/google.png
+    - assets/icons/
+    - assets/icons/customer.png
+    - assets/icons/supplier.png
+    - assets/icons/purchase.png
+    - assets/icons/recieveables.png
+    - assets/icons/payables.png
+    - assets/icons/reports.png
+    - assets/icons/products.png
+    - assets/icons/reciept.png
+    - assets/icons/invoice.png
+    - assets/icons/tools.png
+    - assets/icons/bbillslogo.png
+    - assets/icons/home.png
+    - assets/icons/delivery_challan.png
+    - assets/icons/cash_bank_books.png
+    - assets/icons/download.png
+    - assets/icons/prchse.png
+    - assets/icons/print.png
+    - assets/icons/cat.png
+    - assets/forgot.png
+    - assets/icons/cnote.png
+    - assets/icons/dnote.png
+    - assets/icons/ldeger.png
+    - assets/icons/gstrep.png
+    - assets/icons/misc.png
+    - assets/icons/fmaster.png
+    - assets/icons/sign.png
+    - assets/icons/logo.png
+    - assets/icons/warehouse.png
+    - assets/icons/preturn.png
+    - assets/icons/sreturn.png
+    - assets/icons/stransfer.png
+    - assets/icons/payment.png
+    - assets/cards/cardtem1.png
+    - assets/cards/cardtem2.png
+    - assets/cards/cardtem3.png
+    - assets/cards/cardtem4.png
+    - assets/cards/cardtem5.png
+    - assets/cards/cardtem6.png
+    - assets/cards/cardtem7.png
+    - assets/cards/cardtem8.png
+    - assets/cards/cardtem9.png
+    - assets/cards/cardtem10.png
+    - assets/splash/img1.png
+    - assets/splash/img2.png
+    - assets/splash/img3.png
+    - assets/splash/img4.png
+    - assets/splash/img5.png
+    - assets/splash/img6.png
+    - assets/muscat.png
+    - assets/yt.png
+    - assets/insta.png
+  #   - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware.
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages

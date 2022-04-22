@@ -6,6 +6,7 @@ import 'package:bbills/app_constants/bottom_bar.dart';
 import 'package:bbills/app_constants/ui_constants.dart';
 import 'package:bbills/main.dart';
 import 'package:bbills/screen_models/account_details.dart';
+import 'package:bbills/screen_models/login.dart';
 import 'package:bbills/screen_models/payment.dart';
 import 'package:bbills/screen_models/reciept.dart';
 import 'package:bbills/screen_models/sales.dart';
@@ -140,7 +141,7 @@ class _DashboardState extends State<Dashboard> {
     var token = userdetails.getString("utoken");
     if (token == null) {
       Navigator.pushReplacement(context,
-          PageTransition(type: PageTransitionType.fade, child: MyHomePage()));
+          PageTransition(type: PageTransitionType.fade, child: Login()));
     }
     var screen = await SharedPreferences.getInstance();
     setState(() {
@@ -490,1093 +491,1087 @@ class _DashboardState extends State<Dashboard> {
         ExitApp(context);
         return false;
       },
-      child: Scaffold(
-        backgroundColor: scaffoldbackground,
-        body: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          color: AppBarColor,
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  ConstAppBar("intro_help"),
-                  Container(
-                    height: 35,
-                    width: MediaQuery.of(context).size.width,
-                    color: AppBarColor,
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(12, 8, 8, 8),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.circle,
-                                color: Colors.white,
-                                size: 15,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Dashboard',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 15, color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  if (showloader == true)
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: scaffoldbackground,
+          body: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            color: AppBarColor,
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    ConstAppBar("intro_help"),
                     Container(
-                      height: MediaQuery.of(context).size.height - 140,
+                      height: 35,
                       width: MediaQuery.of(context).size.width,
-                      color: Colors.white,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          strokeWidth: 0.7,
-                        ),
-                      ),
-                    ),
-                  if (showloader == false)
-                    Container(
-                      color: Colors.white,
-                      child: Container(
-                          height: 140,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.center,
-                            stops: [
-                              0.9,
-                              0.1,
-                            ],
-                            colors: [
-                              AppBarColor,
-                              Colors.grey.withOpacity(0.0),
-                            ],
-                          )),
-                          child: Center(
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: 2,
-                                itemBuilder: (BuildContext context, index) {
-                                  return Container(
-                                    height: 120,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Card(
-                                        child: index == 0
-                                            ? Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Container(
-                                                    height: 50,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                    child: IntrinsicHeight(
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        children: [
-                                                          Container(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                3,
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Text(
-                                                                      '₹',
-                                                                      style: GoogleFonts.poppins(
-                                                                          fontSize:
-                                                                              18,
-                                                                          color:
-                                                                              Colors.green),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width: 5,
-                                                                    ),
-                                                                    Text(
-                                                                      recieve,
-                                                                      style: GoogleFonts.poppins(
-                                                                          fontSize:
-                                                                              18,
-                                                                          color:
-                                                                              Colors.green),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Text(
-                                                                  'Receiveables',
-                                                                  style: GoogleFonts.poppins(
-                                                                      fontSize:
-                                                                          14,
-                                                                      color: Colors
-                                                                          .black),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          VerticalDivider(),
-                                                          Container(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                3,
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      right: 0),
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Text(
-                                                                        '₹',
-                                                                        style: GoogleFonts.poppins(
-                                                                            fontSize:
-                                                                                18,
-                                                                            color:
-                                                                                Colors.red),
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            5,
-                                                                      ),
-                                                                      Text(
-                                                                        pay,
-                                                                        style: GoogleFonts.poppins(
-                                                                            fontSize:
-                                                                                18,
-                                                                            color:
-                                                                                Colors.red),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      right:
-                                                                          30),
-                                                                  child: Text(
-                                                                    'Payables',
-                                                                    style: GoogleFonts.poppins(
-                                                                        fontSize:
-                                                                            14,
-                                                                        color: Colors
-                                                                            .black),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 30,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                    child: IntrinsicHeight(
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        children: [
-                                                          Container(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                3,
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                GestureDetector(
-                                                                  onTap: () {
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .popUntil((route) =>
-                                                                            route.isFirst);
-                                                                    Navigator.pushReplacement(
-                                                                        context,
-                                                                        PageTransition(
-                                                                            type:
-                                                                                PageTransitionType.fade,
-                                                                            child: AllRecvScreen()));
-                                                                  },
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Report',
-                                                                        style: GoogleFonts.poppins(
-                                                                            fontSize:
-                                                                                15,
-                                                                            color:
-                                                                                AppBarColor,
-                                                                            fontWeight:
-                                                                                FontWeight.w600),
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            2,
-                                                                      ),
-                                                                      Icon(
-                                                                        Icons
-                                                                            .arrow_right,
-                                                                        size:
-                                                                            20,
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          VerticalDivider(),
-                                                          Container(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                3,
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                GestureDetector(
-                                                                  onTap: () {
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .popUntil((route) =>
-                                                                            route.isFirst);
-                                                                    Navigator.pushReplacement(
-                                                                        context,
-                                                                        PageTransition(
-                                                                            type:
-                                                                                PageTransitionType.fade,
-                                                                            child: AllPayScreen()));
-                                                                  },
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Report',
-                                                                        style: GoogleFonts.poppins(
-                                                                            fontSize:
-                                                                                15,
-                                                                            color:
-                                                                                AppBarColor,
-                                                                            fontWeight:
-                                                                                FontWeight.w600),
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            2,
-                                                                      ),
-                                                                      Icon(
-                                                                        Icons
-                                                                            .arrow_right,
-                                                                        size:
-                                                                            20,
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              )
-                                            : Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Container(
-                                                    height: 50,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                    child: IntrinsicHeight(
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        children: [
-                                                          Container(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                3,
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Text(
-                                                                      '₹',
-                                                                      style: GoogleFonts.poppins(
-                                                                          fontSize:
-                                                                              18,
-                                                                          color:
-                                                                              Colors.green),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width: 5,
-                                                                    ),
-                                                                    Text(
-                                                                      reciept,
-                                                                      style: GoogleFonts.poppins(
-                                                                          fontSize:
-                                                                              18,
-                                                                          color:
-                                                                              Colors.green),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Text(
-                                                                  'Receipts     ',
-                                                                  style: GoogleFonts.poppins(
-                                                                      fontSize:
-                                                                          14,
-                                                                      color: Colors
-                                                                          .black),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          VerticalDivider(),
-                                                          Container(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                3,
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      right: 0),
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Text(
-                                                                        '₹',
-                                                                        style: GoogleFonts.poppins(
-                                                                            fontSize:
-                                                                                18,
-                                                                            color:
-                                                                                Colors.red),
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            5,
-                                                                      ),
-                                                                      Text(
-                                                                        payment,
-                                                                        style: GoogleFonts.poppins(
-                                                                            fontSize:
-                                                                                18,
-                                                                            color:
-                                                                                Colors.red),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      right:
-                                                                          30),
-                                                                  child: Text(
-                                                                    'Payments',
-                                                                    style: GoogleFonts.poppins(
-                                                                        fontSize:
-                                                                            14,
-                                                                        color: Colors
-                                                                            .black),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 30,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                    child: IntrinsicHeight(
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        children: [
-                                                          Container(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                3,
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                GestureDetector(
-                                                                  onTap: () {
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .popUntil((route) =>
-                                                                            route.isFirst);
-                                                                    Navigator.pushReplacement(
-                                                                        context,
-                                                                        PageTransition(
-                                                                            type:
-                                                                                PageTransitionType.fade,
-                                                                            child: RecieptScreen()));
-                                                                  },
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Text(
-                                                                        '  Details',
-                                                                        style: GoogleFonts.poppins(
-                                                                            fontSize:
-                                                                                15,
-                                                                            color:
-                                                                                AppBarColor,
-                                                                            fontWeight:
-                                                                                FontWeight.w600),
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            2,
-                                                                      ),
-                                                                      Icon(
-                                                                        Icons
-                                                                            .arrow_right,
-                                                                        size:
-                                                                            20,
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          VerticalDivider(),
-                                                          Container(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                3,
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                GestureDetector(
-                                                                  onTap: () {
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .popUntil((route) =>
-                                                                            route.isFirst);
-                                                                    Navigator.pushReplacement(
-                                                                        context,
-                                                                        PageTransition(
-                                                                            type:
-                                                                                PageTransitionType.fade,
-                                                                            child: PaymentScreen()));
-                                                                  },
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Details',
-                                                                        style: GoogleFonts.poppins(
-                                                                            fontSize:
-                                                                                15,
-                                                                            color:
-                                                                                AppBarColor,
-                                                                            fontWeight:
-                                                                                FontWeight.w600),
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            2,
-                                                                      ),
-                                                                      Icon(
-                                                                        Icons
-                                                                            .arrow_right,
-                                                                        size:
-                                                                            20,
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                      ),
-                                    ),
-                                  );
-                                }),
-                          )),
-                    ),
-                  if (showloader == false)
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height - 280,
-                      color: Colors.white,
-                      child: ListView(
+                      color: AppBarColor,
+                      child: Row(
                         children: [
-                          Container(
-                            height: 330,
-                            color: Colors.white,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SfCartesianChart(
-                                  trackballBehavior: _trackballBehavior,
-                                  title: ChartTitle(
-                                    text: 'Sale & Purchase Chart',
-                                    textStyle: TextStyle(fontSize: 10),
-                                  ),
-                                  legend: Legend(
-                                      isVisible: true,
-                                      // Legend will be placed at the left
-                                      position: LegendPosition.bottom),
-                                  primaryXAxis: CategoryAxis(
-                                    majorGridLines: MajorGridLines(width: 0),
-                                    //Hide the axis line of x-axis
-                                    axisLine: AxisLine(width: 0),
-                                  ),
-                                  primaryYAxis: CategoryAxis(
-                                    majorGridLines: MajorGridLines(width: 0),
-                                    //Hide the axis line of x-axis
-                                    axisLine: AxisLine(width: 0),
-                                  ),
-                                  series: <CartesianSeries>[
-                                    ColumnSeries<_ChartData, String>(
-                                        name: 'Sales',
-                                        dataSource: data,
-                                        xValueMapper: (_ChartData data, _) =>
-                                            data.x,
-                                        yValueMapper: (_ChartData data, _) =>
-                                            data.y),
-                                    ColumnSeries<_ChartData, String>(
-                                        name: 'Purchase',
-                                        dataSource: data,
-                                        xValueMapper: (_ChartData data, _) =>
-                                            data.x,
-                                        yValueMapper: (_ChartData data, _) =>
-                                            data.y1),
-                                  ]),
-                            ),
-                          ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20),
+                            padding: const EdgeInsets.fromLTRB(12, 8, 8, 8),
                             child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Notes',
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 15, color: Colors.black),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      AddNotes(context);
-                                    },
-                                    child: Icon(
-                                      Icons.add,
-                                      size: 20,
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                ]),
-                          ),
-                          if (shownotif == true)
-                            Container(
-                              //height: 180,
-                              width: MediaQuery.of(context).size.width,
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                                child: Card(
-                                    elevation: 0,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 155,
-                                          child: PageView.builder(
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: notifs.length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      index) {
-                                                return Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width -
-                                                            20,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              00),
-                                                      color: Colors.white,
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                            color: Colors.grey
-                                                                .withOpacity(
-                                                                    0.5),
-                                                            spreadRadius: 1),
-                                                      ],
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        children: [
-                                                          GestureDetector(
-                                                            onTap: () {
-                                                              showAlertDialog(
-                                                                  context,
-                                                                  notifs[index]
-                                                                          ['id']
-                                                                      .toString(),
-                                                                  index);
-                                                            },
-                                                            child: Align(
-                                                                alignment: Alignment
-                                                                    .centerRight,
-                                                                child: Icon(
-                                                                  Icons.cancel,
-                                                                  size: 20,
-                                                                  color: Colors
-                                                                      .red,
-                                                                )),
-                                                          ),
-                                                          Container(
-                                                            height: 100,
-                                                            child: ListView
-                                                                .builder(
-                                                              itemCount: 1,
-                                                              itemBuilder:
-                                                                  (BuildContext
-                                                                          context,
-                                                                      indx) {
-                                                                return Text(
-                                                                  notifs[index][
-                                                                          'reminder']
-                                                                      .toString(),
-                                                                  style: GoogleFonts.poppins(
-                                                                      fontSize:
-                                                                          15,
-                                                                      color: Colors
-                                                                          .black),
-                                                                );
-                                                              },
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              }),
-                                        ),
-                                      ],
-                                    )),
-                              ),
+                              children: [
+                                Icon(
+                                  Icons.circle,
+                                  color: Colors.white,
+                                  size: 15,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'Dashboard',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 15, color: Colors.white),
+                                ),
+                              ],
                             ),
-                          const SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Sales',
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 15, color: Colors.black),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context)
-                                          .popUntil((route) => route.isFirst);
-                                      Navigator.pushReplacement(
-                                        context,
-                                        PageTransition(
-                                          type: PageTransitionType.fade,
-                                          child: AddSBill(),
-                                        ),
-                                      );
-                                    },
-                                    child: Icon(
-                                      Icons.add,
-                                      size: 20,
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                ]),
                           ),
-                          if (showsales == true)
-                            Container(
-                              height: 300,
-                              width: MediaQuery.of(context).size.width,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ListView.builder(
-                                    itemCount: sales.length,
-                                    itemBuilder: (BuildContext context, index) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          Navigator.of(context).popUntil(
-                                              (route) => route.isFirst);
-                                          Navigator.pushReplacement(
-                                              context,
-                                              PageTransition(
-                                                  type: PageTransitionType.fade,
-                                                  child: SalesScreen()));
-                                        },
-                                        child: Column(
-                                          children: [
-                                            Card(
-                                              elevation: 0,
-                                              child: Column(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 8,
-                                                            top: 8,
-                                                            bottom: 2),
-                                                    child: Align(
-                                                      alignment:
-                                                          Alignment.centerLeft,
-                                                      child: Text(
-                                                        sales[index]
-                                                                ['bill_to_name']
-                                                            .toString(),
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                                fontSize: 16,
-                                                                color: Colors
-                                                                    .black,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 8,
-                                                            top: 0,
-                                                            bottom: 2,
-                                                            right: 8),
-                                                    child: Align(
-                                                      alignment:
-                                                          Alignment.centerLeft,
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Row(
-                                                            children: [
-                                                              Text(
-                                                                'Bill no :',
-                                                                style: GoogleFonts.poppins(
-                                                                    fontSize:
-                                                                        13,
-                                                                    color: Colors
-                                                                        .grey
-                                                                        .withOpacity(
-                                                                            0.7),
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500),
-                                                              ),
-                                                              Text(
-                                                                " " +
-                                                                    sales[index]
-                                                                            [
-                                                                            'bill_no']
-                                                                        .toString(),
-                                                                style: GoogleFonts.poppins(
-                                                                    fontSize:
-                                                                        13,
-                                                                    color: Colors
-                                                                        .grey
-                                                                        .withOpacity(
-                                                                            0.7),
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Row(
-                                                            children: [
-                                                              Text(
-                                                                '₹',
-                                                                style: GoogleFonts.poppins(
-                                                                    fontSize:
-                                                                        13,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500),
-                                                              ),
-                                                              Text(
-                                                                " " +
-                                                                    sales[index]
-                                                                            [
-                                                                            'bill_value']
-                                                                        .toString(),
-                                                                style: GoogleFonts.poppins(
-                                                                    fontSize:
-                                                                        13,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 8,
-                                                            top: 0,
-                                                            bottom: 2,
-                                                            right: 8),
-                                                    child: Align(
-                                                      alignment:
-                                                          Alignment.centerLeft,
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Row(
-                                                            children: [
-                                                              Text(
-                                                                'Contact :',
-                                                                style: GoogleFonts.poppins(
-                                                                    fontSize:
-                                                                        13,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400),
-                                                              ),
-                                                              Text(
-                                                                " " +
-                                                                    sales[index]
-                                                                            [
-                                                                            'bill_to_contact']
-                                                                        .toString(),
-                                                                style: GoogleFonts.poppins(
-                                                                    fontSize:
-                                                                        13,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Row(
-                                                            children: [
-                                                              Text(
-                                                                'Bill Date :',
-                                                                style: GoogleFonts.poppins(
-                                                                    fontSize:
-                                                                        13,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500),
-                                                              ),
-                                                              Text(
-                                                                " " +
-                                                                    sales[index]
-                                                                            [
-                                                                            'bill_date']
-                                                                        .toString(),
-                                                                style: GoogleFonts.poppins(
-                                                                    fontSize:
-                                                                        13,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            if (index != sales.length - 1)
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 50, right: 50),
-                                                child: Divider(
-                                                  color: Colors.blueAccent,
-                                                  thickness: 0.2,
-                                                ),
-                                              ),
-                                            if (index == sales.length - 1)
-                                              Container(
-                                                height: 80,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                color: Colors.white,
-                                              ),
-                                          ],
-                                        ),
-                                      );
-                                    }),
-                              ),
-                            ),
-                          SizedBox(
-                            height: 60,
-                          )
                         ],
                       ),
                     ),
-                ],
-              ),
-              Positioned(
-                bottom: 2,
-                left: 0,
-                right: 0,
-                child: BottomBar(lastscreen: "dashboard"),
-              ),
-            ],
+                    if (showloader == true)
+                      Container(
+                        height: MediaQuery.of(context).size.height - 140,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.white,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            strokeWidth: 0.7,
+                          ),
+                        ),
+                      ),
+                    if (showloader == false)
+                      Container(
+                        color: Colors.white,
+                        child: Container(
+                            height: 140,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.center,
+                              stops: [
+                                0.9,
+                                0.1,
+                              ],
+                              colors: [
+                                AppBarColor,
+                                Colors.grey.withOpacity(0.0),
+                              ],
+                            )),
+                            child: Center(
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: 2,
+                                  itemBuilder: (BuildContext context, index) {
+                                    return Container(
+                                      height: 120,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Card(
+                                          child: index == 0
+                                              ? Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      height: 50,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
+                                                      child: IntrinsicHeight(
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: [
+                                                            Container(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  3,
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Text(
+                                                                        '₹',
+                                                                        style: GoogleFonts.poppins(
+                                                                            fontSize:
+                                                                                18,
+                                                                            color:
+                                                                                Colors.green),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            5,
+                                                                      ),
+                                                                      Text(
+                                                                        recieve,
+                                                                        style: GoogleFonts.poppins(
+                                                                            fontSize:
+                                                                                18,
+                                                                            color:
+                                                                                Colors.green),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Text(
+                                                                    'Receiveables',
+                                                                    style: GoogleFonts.poppins(
+                                                                        fontSize:
+                                                                            14,
+                                                                        color: Colors
+                                                                            .black),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            VerticalDivider(),
+                                                            Container(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  3,
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                            .only(
+                                                                        right:
+                                                                            0),
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          '₹',
+                                                                          style: GoogleFonts.poppins(
+                                                                              fontSize: 18,
+                                                                              color: Colors.red),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              5,
+                                                                        ),
+                                                                        Text(
+                                                                          pay,
+                                                                          style: GoogleFonts.poppins(
+                                                                              fontSize: 18,
+                                                                              color: Colors.red),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                            .only(
+                                                                        right:
+                                                                            30),
+                                                                    child: Text(
+                                                                      'Payables',
+                                                                      style: GoogleFonts.poppins(
+                                                                          fontSize:
+                                                                              14,
+                                                                          color:
+                                                                              Colors.black),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 30,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
+                                                      child: IntrinsicHeight(
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: [
+                                                            Container(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  3,
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  GestureDetector(
+                                                                    onTap: () {
+                                                                      Navigator.of(
+                                                                              context)
+                                                                          .popUntil((route) =>
+                                                                              route.isFirst);
+                                                                      Navigator.pushReplacement(
+                                                                          context,
+                                                                          PageTransition(
+                                                                              type: PageTransitionType.fade,
+                                                                              child: AllRecvScreen()));
+                                                                    },
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          'Report',
+                                                                          style: GoogleFonts.poppins(
+                                                                              fontSize: 15,
+                                                                              color: AppBarColor,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              2,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons
+                                                                              .arrow_right,
+                                                                          size:
+                                                                              20,
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            VerticalDivider(),
+                                                            Container(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  3,
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  GestureDetector(
+                                                                    onTap: () {
+                                                                      Navigator.of(
+                                                                              context)
+                                                                          .popUntil((route) =>
+                                                                              route.isFirst);
+                                                                      Navigator.pushReplacement(
+                                                                          context,
+                                                                          PageTransition(
+                                                                              type: PageTransitionType.fade,
+                                                                              child: AllPayScreen()));
+                                                                    },
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          'Report',
+                                                                          style: GoogleFonts.poppins(
+                                                                              fontSize: 15,
+                                                                              color: AppBarColor,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              2,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons
+                                                                              .arrow_right,
+                                                                          size:
+                                                                              20,
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      height: 50,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
+                                                      child: IntrinsicHeight(
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: [
+                                                            Container(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  3,
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Text(
+                                                                        '₹',
+                                                                        style: GoogleFonts.poppins(
+                                                                            fontSize:
+                                                                                18,
+                                                                            color:
+                                                                                Colors.green),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            5,
+                                                                      ),
+                                                                      Text(
+                                                                        reciept,
+                                                                        style: GoogleFonts.poppins(
+                                                                            fontSize:
+                                                                                18,
+                                                                            color:
+                                                                                Colors.green),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Text(
+                                                                    'Receipts     ',
+                                                                    style: GoogleFonts.poppins(
+                                                                        fontSize:
+                                                                            14,
+                                                                        color: Colors
+                                                                            .black),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            VerticalDivider(),
+                                                            Container(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  3,
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                            .only(
+                                                                        right:
+                                                                            0),
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          '₹',
+                                                                          style: GoogleFonts.poppins(
+                                                                              fontSize: 18,
+                                                                              color: Colors.red),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              5,
+                                                                        ),
+                                                                        Text(
+                                                                          payment,
+                                                                          style: GoogleFonts.poppins(
+                                                                              fontSize: 18,
+                                                                              color: Colors.red),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                            .only(
+                                                                        right:
+                                                                            30),
+                                                                    child: Text(
+                                                                      'Payments',
+                                                                      style: GoogleFonts.poppins(
+                                                                          fontSize:
+                                                                              14,
+                                                                          color:
+                                                                              Colors.black),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 30,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
+                                                      child: IntrinsicHeight(
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: [
+                                                            Container(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  3,
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  GestureDetector(
+                                                                    onTap: () {
+                                                                      Navigator.of(
+                                                                              context)
+                                                                          .popUntil((route) =>
+                                                                              route.isFirst);
+                                                                      Navigator.pushReplacement(
+                                                                          context,
+                                                                          PageTransition(
+                                                                              type: PageTransitionType.fade,
+                                                                              child: RecieptScreen()));
+                                                                    },
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          '  Details',
+                                                                          style: GoogleFonts.poppins(
+                                                                              fontSize: 15,
+                                                                              color: AppBarColor,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              2,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons
+                                                                              .arrow_right,
+                                                                          size:
+                                                                              20,
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            VerticalDivider(),
+                                                            Container(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  3,
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  GestureDetector(
+                                                                    onTap: () {
+                                                                      Navigator.of(
+                                                                              context)
+                                                                          .popUntil((route) =>
+                                                                              route.isFirst);
+                                                                      Navigator.pushReplacement(
+                                                                          context,
+                                                                          PageTransition(
+                                                                              type: PageTransitionType.fade,
+                                                                              child: PaymentScreen()));
+                                                                    },
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          'Details',
+                                                                          style: GoogleFonts.poppins(
+                                                                              fontSize: 15,
+                                                                              color: AppBarColor,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              2,
+                                                                        ),
+                                                                        Icon(
+                                                                          Icons
+                                                                              .arrow_right,
+                                                                          size:
+                                                                              20,
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                            )),
+                      ),
+                    if (showloader == false)
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height - 280,
+                        color: Colors.white,
+                        child: ListView(
+                          children: [
+                            Container(
+                              height: 330,
+                              color: Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SfCartesianChart(
+                                    trackballBehavior: _trackballBehavior,
+                                    title: ChartTitle(
+                                      text: 'Sale & Purchase Chart',
+                                      textStyle: TextStyle(fontSize: 10),
+                                    ),
+                                    legend: Legend(
+                                        isVisible: true,
+                                        // Legend will be placed at the left
+                                        position: LegendPosition.bottom),
+                                    primaryXAxis: CategoryAxis(
+                                      majorGridLines: MajorGridLines(width: 0),
+                                      //Hide the axis line of x-axis
+                                      axisLine: AxisLine(width: 0),
+                                    ),
+                                    primaryYAxis: CategoryAxis(
+                                      majorGridLines: MajorGridLines(width: 0),
+                                      //Hide the axis line of x-axis
+                                      axisLine: AxisLine(width: 0),
+                                    ),
+                                    series: <CartesianSeries>[
+                                      ColumnSeries<_ChartData, String>(
+                                          name: 'Sales',
+                                          dataSource: data,
+                                          xValueMapper: (_ChartData data, _) =>
+                                              data.x,
+                                          yValueMapper: (_ChartData data, _) =>
+                                              data.y),
+                                      ColumnSeries<_ChartData, String>(
+                                          name: 'Purchase',
+                                          dataSource: data,
+                                          xValueMapper: (_ChartData data, _) =>
+                                              data.x,
+                                          yValueMapper: (_ChartData data, _) =>
+                                              data.y1),
+                                    ]),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Notes',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 15, color: Colors.black),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        AddNotes(context);
+                                      },
+                                      child: Icon(
+                                        Icons.add,
+                                        size: 20,
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                            if (shownotif == true)
+                              Container(
+                                //height: 180,
+                                width: MediaQuery.of(context).size.width,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                                  child: Card(
+                                      elevation: 0,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 155,
+                                            child: PageView.builder(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount: notifs.length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        index) {
+                                                  return Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width -
+                                                              20,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(00),
+                                                        color: Colors.white,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                              color: Colors.grey
+                                                                  .withOpacity(
+                                                                      0.5),
+                                                              spreadRadius: 1),
+                                                        ],
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Column(
+                                                          children: [
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                showAlertDialog(
+                                                                    context,
+                                                                    notifs[index]
+                                                                            [
+                                                                            'id']
+                                                                        .toString(),
+                                                                    index);
+                                                              },
+                                                              child: Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerRight,
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .cancel,
+                                                                    size: 20,
+                                                                    color: Colors
+                                                                        .red,
+                                                                  )),
+                                                            ),
+                                                            Container(
+                                                              height: 100,
+                                                              child: ListView
+                                                                  .builder(
+                                                                itemCount: 1,
+                                                                itemBuilder:
+                                                                    (BuildContext
+                                                                            context,
+                                                                        indx) {
+                                                                  return Text(
+                                                                    notifs[index]
+                                                                            [
+                                                                            'reminder']
+                                                                        .toString(),
+                                                                    style: GoogleFonts.poppins(
+                                                                        fontSize:
+                                                                            15,
+                                                                        color: Colors
+                                                                            .black),
+                                                                  );
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }),
+                                          ),
+                                        ],
+                                      )),
+                                ),
+                              ),
+                            const SizedBox(height: 10),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Sales',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 15, color: Colors.black),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context)
+                                            .popUntil((route) => route.isFirst);
+                                        Navigator.pushReplacement(
+                                          context,
+                                          PageTransition(
+                                            type: PageTransitionType.fade,
+                                            child: AddSBill(),
+                                          ),
+                                        );
+                                      },
+                                      child: Icon(
+                                        Icons.add,
+                                        size: 20,
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                            if (showsales == true)
+                              Container(
+                                height: 300,
+                                width: MediaQuery.of(context).size.width,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ListView.builder(
+                                      itemCount: sales.length,
+                                      itemBuilder:
+                                          (BuildContext context, index) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).popUntil(
+                                                (route) => route.isFirst);
+                                            Navigator.pushReplacement(
+                                                context,
+                                                PageTransition(
+                                                    type:
+                                                        PageTransitionType.fade,
+                                                    child: SalesScreen()));
+                                          },
+                                          child: Column(
+                                            children: [
+                                              Card(
+                                                elevation: 0,
+                                                child: Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8,
+                                                              top: 8,
+                                                              bottom: 2),
+                                                      child: Align(
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child: Text(
+                                                          sales[index][
+                                                                  'bill_to_name']
+                                                              .toString(),
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8,
+                                                              top: 0,
+                                                              bottom: 2,
+                                                              right: 8),
+                                                      child: Align(
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  'Bill no :',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize:
+                                                                          13,
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .withOpacity(
+                                                                              0.7),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500),
+                                                                ),
+                                                                Text(
+                                                                  " " +
+                                                                      sales[index]
+                                                                              [
+                                                                              'bill_no']
+                                                                          .toString(),
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize:
+                                                                          13,
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .withOpacity(
+                                                                              0.7),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  '₹',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize:
+                                                                          13,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500),
+                                                                ),
+                                                                Text(
+                                                                  " " +
+                                                                      sales[index]
+                                                                              [
+                                                                              'bill_value']
+                                                                          .toString(),
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize:
+                                                                          13,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8,
+                                                              top: 0,
+                                                              bottom: 2,
+                                                              right: 8),
+                                                      child: Align(
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  'Contact :',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize:
+                                                                          13,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                                Text(
+                                                                  " " +
+                                                                      sales[index]
+                                                                              [
+                                                                              'bill_to_contact']
+                                                                          .toString(),
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize:
+                                                                          13,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  'Bill Date :',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize:
+                                                                          13,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500),
+                                                                ),
+                                                                Text(
+                                                                  " " +
+                                                                      sales[index]
+                                                                              [
+                                                                              'bill_date']
+                                                                          .toString(),
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize:
+                                                                          13,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              if (index != sales.length - 1)
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 50, right: 50),
+                                                  child: Divider(
+                                                    color: Colors.blueAccent,
+                                                    thickness: 0.2,
+                                                  ),
+                                                ),
+                                              if (index == sales.length - 1)
+                                                Container(
+                                                  height: 80,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  color: Colors.white,
+                                                ),
+                                            ],
+                                          ),
+                                        );
+                                      }),
+                                ),
+                              ),
+                            SizedBox(
+                              height: 60,
+                            )
+                          ],
+                        ),
+                      ),
+                  ],
+                ),
+                Positioned(
+                  bottom: 2,
+                  left: 0,
+                  right: 0,
+                  child: BottomBar(lastscreen: "dashboard"),
+                ),
+              ],
+            ),
           ),
         ),
       ),

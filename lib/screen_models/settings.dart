@@ -143,7 +143,6 @@ class _Settings_ScreenState extends State<Settings_Screen>
     super.dispose();
   }
 
-  
   void LogOut(BuildContext context) {
     showDialog(
       context: context,
@@ -164,7 +163,10 @@ class _Settings_ScreenState extends State<Settings_Screen>
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text("Cancel", style: TextStyle(color: Colors.black),),
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
                 ElevatedButton(
                   onPressed: () async {
@@ -222,7 +224,6 @@ class _Settings_ScreenState extends State<Settings_Screen>
       });
     }
   }
-
 
 /*  Future uplogo() async{
     var a;
@@ -716,214 +717,304 @@ class _Settings_ScreenState extends State<Settings_Screen>
         return false;
       },
       child: showloader == false
-          ? Scaffold(
-              backgroundColor: Colors.white,
-              appBar: AppBar(
-                  toolbarHeight: 50,
-                  backgroundColor: Colors.white,
-                  elevation: 0,
-                  leading: IconButton(
-                    onPressed: () {
-                      Navigator.of(context).popUntil((route) => route.isFirst);
-                      Navigator.pushReplacement(
-                          context,
-                          PageTransition(
-                              type: PageTransitionType.fade,
-                              child: Dashboard()));
-                    },
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: AppBarColor,
+          ? SafeArea(
+              child: Scaffold(
+                backgroundColor: Colors.white,
+                appBar: AppBar(
+                    toolbarHeight: 50,
+                    backgroundColor: AppBarColor,
+                    elevation: 0,
+                    leading: IconButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
+                        Navigator.pushReplacement(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.fade,
+                                child: Dashboard()));
+                      },
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  title: Text(
-                    'Settings',
-                    style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        color: AppBarColor,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  actions: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                      child: HelpButton(helpURL: "settings_help"),
-                    )
-                  ]),
-              body: Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                color: Colors.lightBlueAccent.withOpacity(0.1),
-                child: ListView(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8, bottom: 0),
-                      child: ExpansionTile(
-                        initiallyExpanded: true,
-                        leading: Image.asset(
-                          'assets/icons/fmaster.png',
-                          color: AppBarColor,
-                          height: report_icon_size,
-                        ),
-                        backgroundColor: Colors.white,
-                        collapsedBackgroundColor: Colors.white,
-                        title: Text(
-                          "Firm Master",
-                          style: GoogleFonts.poppins(
-                              fontSize: title_font,
-                              color: AppBarColor,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        children: <Widget>[
-                          ListTile(
-                            onTap: () {
-                              Navigator.of(context)
-                                  .popUntil((route) => route.isFirst);
-                              Navigator.pushReplacement(
-                                  context,
-                                  PageTransition(
-                                      type: PageTransitionType.fade,
-                                      child: Accnt_Details(
-                                        from: "settings",
-                                      )));
-                            },
-                            contentPadding: const EdgeInsets.only(
-                              left: 70,
-                            ),
-                            leading: Image.asset(
-                              'assets/icons/fmaster.png',
-                              color: AppBarColor,
-                              height: report_icon_size,
-                            ),
-                            title: Text(
-                              'Business Settings',
-                              style: GoogleFonts.poppins(
-                                  fontSize: title_font,
-                                  color: AppBarColor,
-                                  fontWeight: FontWeight.w400),
-                            ),
+                    title: Text(
+                      'Settings',
+                      style: GoogleFonts.poppins(
+                          fontSize: 18,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    actions: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+                        child: HelpButton(helpURL: "settings_help"),
+                      )
+                    ]),
+                body: Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.white,
+                  child: ListView(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2, bottom: 0),
+                        child: ExpansionTile(
+                          initiallyExpanded: true,
+                          leading: Image.asset(
+                            'assets/icons/fmaster.png',
+                            color: AppBarColor,
+                            height: report_icon_size,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 55, top: 8, bottom: 0),
-                            child: ExpansionTile(
+                          backgroundColor: Colors.white,
+                          collapsedBackgroundColor: Colors.white,
+                          title: Text(
+                            "Firm Master",
+                            style: GoogleFonts.poppins(
+                                fontSize: title_font,
+                                color: AppBarColor,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          children: <Widget>[
+                            ListTile(
+                              onTap: () {
+                                Navigator.of(context)
+                                    .popUntil((route) => route.isFirst);
+                                Navigator.pushReplacement(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.fade,
+                                        child: Accnt_Details(
+                                          from: "settings",
+                                        )));
+                              },
+                              contentPadding: const EdgeInsets.only(
+                                left: 70,
+                              ),
                               leading: Image.asset(
-                                'assets/icons/logo.png',
+                                'assets/icons/fmaster.png',
                                 color: AppBarColor,
                                 height: report_icon_size,
                               ),
-                              backgroundColor: Colors.white,
-                              collapsedBackgroundColor: Colors.white,
                               title: Text(
-                                "Logo",
+                                'Business Settings',
                                 style: GoogleFonts.poppins(
                                     fontSize: title_font,
                                     color: AppBarColor,
                                     fontWeight: FontWeight.w400),
                               ),
-                              children: <Widget>[
-                                Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Container(
-                                              height: 100,
-                                              width: 100,
-                                              margin:
-                                                  const EdgeInsets.all(30.0),
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              decoration: BoxDecoration(
-                                                image: _imagelogo != null
-                                                    ? DecorationImage(
-                                                        image: FileImage(
-                                                            _imagelogo!),
-                                                        fit: BoxFit.fill,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 55, top: 8, bottom: 0),
+                              child: ExpansionTile(
+                                leading: Image.asset(
+                                  'assets/icons/logo.png',
+                                  color: AppBarColor,
+                                  height: report_icon_size,
+                                ),
+                                backgroundColor: Colors.white,
+                                collapsedBackgroundColor: Colors.white,
+                                title: Text(
+                                  "Logo",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: title_font,
+                                      color: AppBarColor,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                children: <Widget>[
+                                  Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                height: 100,
+                                                width: 100,
+                                                margin:
+                                                    const EdgeInsets.all(30.0),
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                decoration: BoxDecoration(
+                                                  image: _imagelogo != null
+                                                      ? DecorationImage(
+                                                          image: FileImage(
+                                                              _imagelogo!),
+                                                          fit: BoxFit.fill,
+                                                        )
+                                                      : DecorationImage(
+                                                          image: NetworkImage(
+                                                              logo.toString()),
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                                  border: Border.all(),
+                                                ), //             <--- BoxDecoration here
+                                                child: _imagelogo == null
+                                                    ? Center(
+                                                        child: logo == ''
+                                                            ? Text(
+                                                                "Logo",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        30.0),
+                                                              )
+                                                            : Text(
+                                                                "",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        30.0),
+                                                              ),
                                                       )
-                                                    : DecorationImage(
-                                                        image: NetworkImage(
-                                                            logo.toString()),
-                                                        fit: BoxFit.fill,
-                                                      ),
-                                                border: Border.all(),
-                                              ), //             <--- BoxDecoration here
-                                              child: _imagelogo == null
-                                                  ? Center(
-                                                      child: logo == ''
-                                                          ? Text(
-                                                              "Logo",
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      30.0),
-                                                            )
-                                                          : Text(
-                                                              "",
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      30.0),
-                                                            ),
-                                                    )
-                                                  : Center(),
+                                                    : Center(),
+                                              ),
+                                              Column(
+                                                children: [
+                                                  RaisedButton(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
+                                                      onPressed: () {
+                                                        UploadLogo(context);
+                                                      },
+                                                      child: Text('Update',
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  fontSize: 15,
+                                                                  color: Colors
+                                                                      .white)),
+                                                      elevation: 0,
+                                                      color: Colors.blue),
+                                                  SizedBox(height: 5),
+                                                  RaisedButton(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
+                                                      onPressed: () {
+                                                        remove_Logo('remove');
+                                                      },
+                                                      child: Text('Remove',
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  fontSize: 15,
+                                                                  color: Colors
+                                                                      .white)),
+                                                      elevation: 0,
+                                                      color: Colors.red),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                          if (_imagelogo != null)
+                                            Container(
+                                              width: 100,
+                                              margin: const EdgeInsets.only(
+                                                  left: 30, right: 30),
+                                              child: RaisedButton(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10)),
+                                                  onPressed: () {
+                                                    remove_Logo('upload');
+                                                  },
+                                                  child: Text('Upload',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .white)),
+                                                  elevation: 0,
+                                                  color: Colors.blue),
                                             ),
-                                            Column(
-                                              children: [
-                                                RaisedButton(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10)),
-                                                    onPressed: () {
-                                                      UploadLogo(context);
-                                                    },
-                                                    child: Text('Update',
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                                fontSize: 15,
-                                                                color: Colors
-                                                                    .white)),
-                                                    elevation: 0,
-                                                    color: Colors.blue),
-                                                SizedBox(height: 5),
-                                                RaisedButton(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10)),
-                                                    onPressed: () {
-                                                      remove_Logo('remove');
-                                                    },
-                                                    child: Text('Remove',
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                                fontSize: 15,
-                                                                color: Colors
-                                                                    .white)),
-                                                    elevation: 0,
-                                                    color: Colors.red),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        if (_imagelogo != null)
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 55, top: 8, bottom: 0),
+                              child: ExpansionTile(
+                                leading: Image.asset(
+                                  'assets/icons/sign.png',
+                                  color: AppBarColor,
+                                  height: report_icon_size,
+                                ),
+                                backgroundColor: Colors.white,
+                                collapsedBackgroundColor: Colors.white,
+                                title: Text(
+                                  "Signature",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: title_font,
+                                      color: AppBarColor,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                children: <Widget>[
+                                  Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
                                           Container(
-                                            width: 100,
-                                            margin: const EdgeInsets.only(
-                                                left: 30, right: 30),
-                                            child: RaisedButton(
+                                            height: 100,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            margin: const EdgeInsets.all(30.0),
+                                            padding: const EdgeInsets.all(10.0),
+                                            decoration: BoxDecoration(
+                                              image: _imageSign != null
+                                                  ? DecorationImage(
+                                                      image: FileImage(
+                                                          _imageSign!),
+                                                      fit: BoxFit.fill,
+                                                    )
+                                                  : DecorationImage(
+                                                      image: NetworkImage(
+                                                          sign.toString()),
+                                                      fit: BoxFit.fill,
+                                                    ),
+                                              border: Border.all(),
+                                            ), //             <--- BoxDecoration here
+                                            child: _imageSign == null
+                                                ? Center(
+                                                    child: sign == ''
+                                                        ? Text(
+                                                            "Signature",
+                                                            style: TextStyle(
+                                                                fontSize: 30.0),
+                                                          )
+                                                        : Text(
+                                                            "",
+                                                            style: TextStyle(
+                                                                fontSize: 30.0),
+                                                          ),
+                                                  )
+                                                : Center(),
+                                          ),
+                                          if (_imageSign != null)
+                                            RaisedButton(
                                                 shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10)),
                                                 onPressed: () {
-                                                  remove_Logo('upload');
+                                                  remove_Sign('upload');
                                                 },
                                                 child: Text('Upload',
                                                     style: GoogleFonts.poppins(
@@ -931,189 +1022,111 @@ class _Settings_ScreenState extends State<Settings_Screen>
                                                         color: Colors.white)),
                                                 elevation: 0,
                                                 color: Colors.blue),
-                                          ),
-                                      ],
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              RaisedButton(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10)),
+                                                  onPressed: () {
+                                                    UploadSign(context);
+                                                  },
+                                                  child: Text('Update',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .white)),
+                                                  elevation: 0,
+                                                  color: Colors.blue),
+                                              SizedBox(width: 5),
+                                              RaisedButton(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10)),
+                                                  onPressed: () {
+                                                    remove_Sign('remove');
+                                                  },
+                                                  child: Text('Remove',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .white)),
+                                                  elevation: 0,
+                                                  color: Colors.red),
+                                            ],
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                )
-                              ],
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 55, top: 8, bottom: 0),
-                            child: ExpansionTile(
+                            ListTile(
+                              onTap: () {
+                                Navigator.of(context)
+                                    .popUntil((route) => route.isFirst);
+                                Navigator.pushReplacement(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.fade,
+                                        child: Terms_Conds()));
+                              },
+                              contentPadding: const EdgeInsets.only(
+                                left: 70,
+                              ),
                               leading: Image.asset(
-                                'assets/icons/sign.png',
+                                'assets/icons/misc.png',
                                 color: AppBarColor,
                                 height: report_icon_size,
                               ),
-                              backgroundColor: Colors.white,
-                              collapsedBackgroundColor: Colors.white,
                               title: Text(
-                                "Signature",
+                                'Terms and Conditions',
                                 style: GoogleFonts.poppins(
                                     fontSize: title_font,
                                     color: AppBarColor,
                                     fontWeight: FontWeight.w400),
                               ),
-                              children: <Widget>[
-                                Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          height: 100,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          margin: const EdgeInsets.all(30.0),
-                                          padding: const EdgeInsets.all(10.0),
-                                          decoration: BoxDecoration(
-                                            image: _imageSign != null
-                                                ? DecorationImage(
-                                                    image:
-                                                        FileImage(_imageSign!),
-                                                    fit: BoxFit.fill,
-                                                  )
-                                                : DecorationImage(
-                                                    image: NetworkImage(
-                                                        sign.toString()),
-                                                    fit: BoxFit.fill,
-                                                  ),
-                                            border: Border.all(),
-                                          ), //             <--- BoxDecoration here
-                                          child: _imageSign == null
-                                              ? Center(
-                                                  child: sign == ''
-                                                      ? Text(
-                                                          "Signature",
-                                                          style: TextStyle(
-                                                              fontSize: 30.0),
-                                                        )
-                                                      : Text(
-                                                          "",
-                                                          style: TextStyle(
-                                                              fontSize: 30.0),
-                                                        ),
-                                                )
-                                              : Center(),
-                                        ),
-                                        if (_imageSign != null)
-                                          RaisedButton(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              onPressed: () {
-                                                remove_Sign('upload');
-                                              },
-                                              child: Text('Upload',
-                                                  style: GoogleFonts.poppins(
-                                                      fontSize: 15,
-                                                      color: Colors.white)),
-                                              elevation: 0,
-                                              color: Colors.blue),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            RaisedButton(
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
-                                                onPressed: () {
-                                                  UploadSign(context);
-                                                },
-                                                child: Text('Update',
-                                                    style: GoogleFonts.poppins(
-                                                        fontSize: 15,
-                                                        color: Colors.white)),
-                                                elevation: 0,
-                                                color: Colors.blue),
-                                            SizedBox(width: 5),
-                                            RaisedButton(
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
-                                                onPressed: () {
-                                                  remove_Sign('remove');
-                                                },
-                                                child: Text('Remove',
-                                                    style: GoogleFonts.poppins(
-                                                        fontSize: 15,
-                                                        color: Colors.white)),
-                                                elevation: 0,
-                                                color: Colors.red),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
                             ),
-                          ),
-                          ListTile(
-                            onTap: () {
-                              Navigator.of(context)
-                                  .popUntil((route) => route.isFirst);
-                              Navigator.pushReplacement(
-                                  context,
-                                  PageTransition(
-                                      type: PageTransitionType.fade,
-                                      child: Terms_Conds()));
-                            },
-                            contentPadding: const EdgeInsets.only(
-                              left: 70,
+                            ListTile(
+                              onTap: () {
+                                Navigator.of(context)
+                                    .popUntil((route) => route.isFirst);
+                                Navigator.pushReplacement(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.fade,
+                                        child: Add_Bank()));
+                              },
+                              contentPadding: const EdgeInsets.only(
+                                left: 70,
+                              ),
+                              leading: Image.asset(
+                                'assets/icons/warehouse.png',
+                                color: AppBarColor,
+                                height: report_icon_size,
+                              ),
+                              title: Text(
+                                'Add Bank',
+                                style: GoogleFonts.poppins(
+                                    fontSize: title_font,
+                                    color: AppBarColor,
+                                    fontWeight: FontWeight.w400),
+                              ),
                             ),
-                            leading: Image.asset(
-                              'assets/icons/misc.png',
-                              color: AppBarColor,
-                              height: report_icon_size,
-                            ),
-                            title: Text(
-                              'Terms and Conditions',
-                              style: GoogleFonts.poppins(
-                                  fontSize: title_font,
-                                  color: AppBarColor,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                          ListTile(
-                            onTap: () {
-                              Navigator.of(context)
-                                  .popUntil((route) => route.isFirst);
-                              Navigator.pushReplacement(
-                                  context,
-                                  PageTransition(
-                                      type: PageTransitionType.fade,
-                                      child: Add_Bank()));
-                            },
-                            contentPadding: const EdgeInsets.only(
-                              left: 70,
-                            ),
-                            leading: Image.asset(
-                              'assets/icons/warehouse.png',
-                              color: AppBarColor,
-                              height: report_icon_size,
-                            ),
-                            title: Text(
-                              'Add Bank',
-                              style: GoogleFonts.poppins(
-                                  fontSize: title_font,
-                                  color: AppBarColor,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-/*              Padding(
+                      Divider(
+                        color: Colors.grey.shade500,
+                      ),
+                      /*              Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 0),
                 child: ExpansionTile(
                   leading: Image.asset('assets/icons/sales.png',color:AppBarColor, height: report_icon_size,),
@@ -1124,8 +1137,8 @@ class _Settings_ScreenState extends State<Settings_Screen>
                       fontWeight: FontWeight.w400
                   ),),
                   children: <Widget>[
-
-
+            
+            
                   ],
                 ),
               ),
@@ -1140,18 +1153,18 @@ class _Settings_ScreenState extends State<Settings_Screen>
                       fontWeight: FontWeight.w400
                   ),),
                   children: <Widget>[
-
+            
                   ],
                 ),
               ),*/
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8, bottom: 0),
-                      child: Container(
-                        color: Colors.white,
-                        child: ListTile(
-                          tileColor: Colors.white,
-                          onTap: () {
-                            /* Navigator.of(context)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2, bottom: 0),
+                        child: Container(
+                          color: Colors.white,
+                          child: ListTile(
+                            tileColor: Colors.white,
+                            onTap: () {
+                              /* Navigator.of(context)
                           .popUntil((route) =>
                       route.isFirst);
                       Navigator
@@ -1161,209 +1174,217 @@ class _Settings_ScreenState extends State<Settings_Screen>
                               type: PageTransitionType
                                   .fade,
                               child: VisitCards()));*/
-                            setState(() {
-                              bottomSelectedIndex = 0;
-                            });
-                            showModalBottomSheet(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              backgroundColor: Colors.white,
-                              builder: (BuildContext context) {
-                                return Container(
-                                  height: 400,
-                                  child: Stack(
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                color: AppBarColor,
-                                                borderRadius: BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(20.0),
-                                                    topLeft:
-                                                        Radius.circular(20.0),
-                                                    bottomLeft:
-                                                        Radius.circular(00.0),
-                                                    bottomRight:
-                                                        Radius.circular(00.0))),
-                                            height: 70,
-                                            child: Center(
-                                              child: Text(
-                                                'Select a card template',
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
+                              setState(() {
+                                bottomSelectedIndex = 0;
+                              });
+                              showModalBottomSheet(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(20.0),
+                                        topLeft: Radius.circular(20.0),
+                                        bottomLeft: Radius.circular(00.0),
+                                        bottomRight: Radius.circular(00.0))),
+                                backgroundColor: Colors.white,
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    height: 400,
+                                    child: Stack(
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  color: AppBarColor,
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topRight: Radius
+                                                              .circular(20.0),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  20.0),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  00.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  00.0))),
+                                              height: 70,
+                                              child: Center(
+                                                child: Text(
+                                                  'Select a card template',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Colors.white),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Container(
-                                            height: 230,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            child: PageView.builder(
-                                                controller: pagenController,
-                                                onPageChanged: (index) {
-                                                  setState(() {
-                                                    pageChanged(index);
-                                                  });
-                                                },
-                                                itemCount: 10,
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        index) {
-                                                  return GestureDetector(
-                                                    onTap: () {
-                                                      Navigator.of(context)
-                                                          .popUntil((route) =>
-                                                              route.isFirst);
-                                                      Navigator.pushReplacement(
-                                                          context,
-                                                          PageTransition(
-                                                              type:
-                                                                  PageTransitionType
-                                                                      .fade,
-                                                              child: VisitCards(
-                                                                index: index
-                                                                    .toString(),
-                                                              )));
-                                                    },
-                                                    child: Container(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Card(
-                                                          elevation: 10,
-                                                          child: Container(
-                                                            height: 100,
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width -
-                                                                20,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              image:
-                                                                  DecorationImage(
-                                                                image: AssetImage(
-                                                                    "assets/cards/cardtem${index + 1}.png"),
-                                                                fit: BoxFit
-                                                                    .fitWidth,
+                                            Container(
+                                              height: 230,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              child: PageView.builder(
+                                                  controller: pagenController,
+                                                  onPageChanged: (index) {
+                                                    setState(() {
+                                                      pageChanged(index);
+                                                    });
+                                                  },
+                                                  itemCount: 10,
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          index) {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.of(context)
+                                                            .popUntil((route) =>
+                                                                route.isFirst);
+                                                        Navigator
+                                                            .pushReplacement(
+                                                                context,
+                                                                PageTransition(
+                                                                    type: PageTransitionType
+                                                                        .fade,
+                                                                    child:
+                                                                        VisitCards(
+                                                                      index: index
+                                                                          .toString(),
+                                                                    )));
+                                                      },
+                                                      child: Container(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Card(
+                                                            elevation: 10,
+                                                            child: Container(
+                                                              height: 100,
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width -
+                                                                  20,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                image:
+                                                                    DecorationImage(
+                                                                  image: AssetImage(
+                                                                      "assets/cards/cardtem${index + 1}.png"),
+                                                                  fit: BoxFit
+                                                                      .fitWidth,
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  );
-                                                }),
-                                          )
-                                        ],
-                                      ),
-                                      Positioned(
-                                          top: 145,
-                                          // left: 40,
-                                          left: 24,
-                                          child: Container(
-                                            height: 60,
-                                            width: 60,
-                                            decoration: BoxDecoration(
-                                              color: Colors.transparent,
-                                              borderRadius:
-                                                  BorderRadius.circular(80.0),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: FloatingActionButton(
-                                                heroTag: null,
-                                                elevation: 0,
-                                                onPressed: () {
-                                                  if (bottomSelectedIndex !=
-                                                      0) {
-                                                    setState(() {
-                                                      bottomTapped(
-                                                          bottomSelectedIndex -
-                                                              1);
-                                                    });
-                                                  }
-                                                },
-                                                backgroundColor: Colors.blue
-                                                    .withOpacity(0.3),
-                                                child: Center(
-                                                    child: Icon(
-                                                  Icons.arrow_back_ios,
-                                                  size: 15,
-                                                )),
+                                                    );
+                                                  }),
+                                            )
+                                          ],
+                                        ),
+                                        Positioned(
+                                            top: 145,
+                                            // left: 40,
+                                            left: 24,
+                                            child: Container(
+                                              height: 60,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                color: Colors.transparent,
+                                                borderRadius:
+                                                    BorderRadius.circular(80.0),
                                               ),
-                                            ),
-                                          )),
-                                      Positioned(
-                                          top: 145,
-                                          // left: 40,
-                                          right: 24,
-                                          child: Container(
-                                            height: 60,
-                                            width: 60,
-                                            decoration: BoxDecoration(
-                                              color: Colors.transparent,
-                                              borderRadius:
-                                                  BorderRadius.circular(80.0),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: FloatingActionButton(
-                                                heroTag: null,
-                                                elevation: 0,
-                                                onPressed: () {
-                                                  if (bottomSelectedIndex !=
-                                                      10) {
-                                                    setState(() {
-                                                      bottomTapped(
-                                                          bottomSelectedIndex +
-                                                              1);
-                                                    });
-                                                  }
-                                                },
-                                                backgroundColor: Colors.blue
-                                                    .withOpacity(0.3),
-                                                child: Center(
-                                                    child: Icon(
-                                                  Icons.arrow_forward_ios,
-                                                  size: 15,
-                                                )),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: FloatingActionButton(
+                                                  heroTag: null,
+                                                  elevation: 0,
+                                                  onPressed: () {
+                                                    if (bottomSelectedIndex !=
+                                                        0) {
+                                                      setState(() {
+                                                        bottomTapped(
+                                                            bottomSelectedIndex -
+                                                                1);
+                                                      });
+                                                    }
+                                                  },
+                                                  backgroundColor: Colors.blue
+                                                      .withOpacity(0.3),
+                                                  child: Center(
+                                                      child: Icon(
+                                                    Icons.arrow_back_ios,
+                                                    size: 15,
+                                                  )),
+                                                ),
                                               ),
-                                            ),
-                                          )),
-                                    ],
-                                  ),
-                                );
-                              },
-                              context: context,
-                            );
-                          },
-                          leading: Image.asset(
-                            'assets/icons/tools.png',
-                            color: AppBarColor,
-                            height: report_icon_size,
-                          ),
-                          title: Text(
-                            'Digital Visiting Card',
-                            style: GoogleFonts.poppins(
-                                fontSize: title_font,
-                                color: AppBarColor,
-                                fontWeight: FontWeight.w400),
+                                            )),
+                                        Positioned(
+                                            top: 145,
+                                            // left: 40,
+                                            right: 24,
+                                            child: Container(
+                                              height: 60,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                color: Colors.transparent,
+                                                borderRadius:
+                                                    BorderRadius.circular(80.0),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: FloatingActionButton(
+                                                  heroTag: null,
+                                                  elevation: 0,
+                                                  onPressed: () {
+                                                    if (bottomSelectedIndex !=
+                                                        10) {
+                                                      setState(() {
+                                                        bottomTapped(
+                                                            bottomSelectedIndex +
+                                                                1);
+                                                      });
+                                                    }
+                                                  },
+                                                  backgroundColor: Colors.blue
+                                                      .withOpacity(0.3),
+                                                  child: Center(
+                                                      child: Icon(
+                                                    Icons.arrow_forward_ios,
+                                                    size: 15,
+                                                  )),
+                                                ),
+                                              ),
+                                            )),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                context: context,
+                              );
+                            },
+                            leading: Image.asset(
+                              'assets/icons/tools.png',
+                              color: AppBarColor,
+                              height: report_icon_size,
+                            ),
+                            title: Text(
+                              'Digital Visiting Card',
+                              style: GoogleFonts.poppins(
+                                  fontSize: title_font,
+                                  color: AppBarColor,
+                                  fontWeight: FontWeight.w400),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    /* Padding(
+                      /* Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 0),
                 child: ExpansionTile(
                   initiallyExpanded: true,
@@ -1405,116 +1426,135 @@ class _Settings_ScreenState extends State<Settings_Screen>
                   ],
                 ),
               ),*/
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8, bottom: 0),
-                      child: Container(
-                        color: Colors.white,
-                        child: ListTile(
-                          tileColor: Colors.white,
-                          onTap: () {
-                            Navigator.of(context)
-                                .popUntil((route) => route.isFirst);
-                            Navigator.pushReplacement(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.fade,
-                                    child: BillFormat()));
-                          },
-                          leading: Image.asset(
-                            'assets/icons/reciept.png',
-                            color: AppBarColor,
-                            height: report_icon_size,
-                          ),
-                          title: Text(
-                            'Bill Format',
-                            style: GoogleFonts.poppins(
-                                fontSize: title_font,
-                                color: AppBarColor,
-                                fontWeight: FontWeight.w400),
+
+                      Divider(
+                        color: Colors.grey.shade500,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2, bottom: 0),
+                        child: Container(
+                          color: Colors.white,
+                          child: ListTile(
+                            tileColor: Colors.white,
+                            onTap: () {
+                              Navigator.of(context)
+                                  .popUntil((route) => route.isFirst);
+                              Navigator.pushReplacement(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.fade,
+                                      child: BillFormat()));
+                            },
+                            leading: Image.asset(
+                              'assets/icons/reciept.png',
+                              color: AppBarColor,
+                              height: report_icon_size,
+                            ),
+                            title: Text(
+                              'Bill Format',
+                              style: GoogleFonts.poppins(
+                                  fontSize: title_font,
+                                  color: AppBarColor,
+                                  fontWeight: FontWeight.w400),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8, bottom: 0),
-                      child: Container(
-                        color: Colors.white,
-                        child: ListTile(
-                          tileColor: Colors.white,
-                          onTap: () {
-                            Navigator.of(context)
-                                .popUntil((route) => route.isFirst);
-                            Navigator.pushReplacement(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.fade,
-                                    child: Cpass()));
-                          },
-                          leading: Image.asset(
-                            'assets/icons/tools.png',
-                            color: AppBarColor,
-                            height: report_icon_size,
-                          ),
-                          title: Text(
-                            'Change Password',
-                            style: GoogleFonts.poppins(
-                                fontSize: title_font,
-                                color: AppBarColor,
-                                fontWeight: FontWeight.w400),
+                      Divider(
+                        color: Colors.grey.shade500,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2, bottom: 0),
+                        child: Container(
+                          color: Colors.white,
+                          child: ListTile(
+                            tileColor: Colors.white,
+                            onTap: () {
+                              Navigator.of(context)
+                                  .popUntil((route) => route.isFirst);
+                              Navigator.pushReplacement(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.fade,
+                                      child: Cpass()));
+                            },
+                            leading: Image.asset(
+                              'assets/icons/tools.png',
+                              color: AppBarColor,
+                              height: report_icon_size,
+                            ),
+                            title: Text(
+                              'Change Password',
+                              style: GoogleFonts.poppins(
+                                  fontSize: title_font,
+                                  color: AppBarColor,
+                                  fontWeight: FontWeight.w400),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8, bottom: 0),
-                      child: Container(
-                        color: Colors.white,
-                        child: ListTile(
-                          tileColor: Colors.white,
-                          onTap: () {
-                            Navigator.of(context)
-                                .popUntil((route) => route.isFirst);
-                            Navigator.pushReplacement(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.fade,
-                                    child: About()));
-                          },
-                          leading: Icon(Icons.info_outline,
-                              size: 20, color: AppBarColor),
-                          title: Text(
-                            'About',
-                            style: GoogleFonts.poppins(
-                                fontSize: title_font,
-                                color: AppBarColor,
-                                fontWeight: FontWeight.w400),
+                      Divider(
+                        color: Colors.grey.shade500,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2, bottom: 0),
+                        child: Container(
+                          color: Colors.white,
+                          child: ListTile(
+                            tileColor: Colors.white,
+                            onTap: () {
+                              Navigator.of(context)
+                                  .popUntil((route) => route.isFirst);
+                              Navigator.pushReplacement(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.fade,
+                                      child: About()));
+                            },
+                            leading: Icon(Icons.info_outline,
+                                size: 20, color: AppBarColor),
+                            title: Text(
+                              'About',
+                              style: GoogleFonts.poppins(
+                                  fontSize: title_font,
+                                  color: AppBarColor,
+                                  fontWeight: FontWeight.w400),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8, bottom: 0),
-                      child: Container(
-                        color: Colors.white,
-                        child: ListTile(
-                          tileColor: Colors.white,
-                          onTap: () {
-                            LogOut(context);
-                          },
-                          leading: const Icon(Icons.logout_rounded,
-                              size: 20, color: Colors.red),
-                          title: Text(
-                            'Log out',
-                            style: GoogleFonts.poppins(
-                                fontSize: title_font,
-                                color: Colors.red,
-                                fontWeight: FontWeight.w400),
+                      Divider(
+                        color: Colors.grey.shade500,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2, bottom: 0),
+                        child: Container(
+                          color: Colors.white,
+                          child: ListTile(
+                            tileColor: Colors.white,
+                            onTap: () {
+                              LogOut(context);
+                            },
+                            leading: const Icon(Icons.logout_rounded,
+                                size: 20, color: Colors.red),
+                            title: Text(
+                              'Log out',
+                              style: GoogleFonts.poppins(
+                                  fontSize: title_font,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.w400),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 50,),
-                  ],
+                      Divider(
+                        color: Colors.grey.shade500,
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             )

@@ -244,10 +244,8 @@ class _DashboardState extends State<Dashboard> {
           if (rsp['error'].toString() == "invalid_auth") {
             Navigator.of(context).popUntil((route) => route.isFirst);
             //showPrintedMessage(context, "Error", "Session expired", Colors.white,Colors.redAccent, Icons.info, true, "bottom");
-            Navigator.pushReplacement(
-                context,
-                PageTransition(
-                    type: PageTransitionType.fade, child: MyHomePage()));
+            Navigator.pushReplacement(context,
+                PageTransition(type: PageTransitionType.fade, child: Login()));
           }
         }
       }

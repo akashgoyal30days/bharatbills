@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:bluetooth_print/bluetooth_print.dart';
 import 'package:dio/dio.dart';
@@ -261,7 +262,15 @@ class _SalesScreenState extends State<SalesScreen> {
         "bill": selectedbillno,
         "dt": userdetails.getString("spc").toString(),
       });
+
+      log({
+        "api_key": bill_file_api_key,
+        "type": "gen",
+        "bill": selectedbillno,
+        "dt": userdetails.getString("spc").toString(),
+      }.toString());
       debugPrint(rsp.toString());
+      // log(rsp.toString());
       if (rsp.containsKey('status')) {
         setState(() {
           showloader = false;

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bbills/app_constants/api_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -16,6 +18,7 @@ Future fileurlapi(String package, String url, Map fromfile) async {
     Uri.https("villaments.win", "$package/$url"),
     body: fromfile,
   );
+  log(response.body.toString());
 
   var convertedDatatoJson = json.decode(response.body.replaceAll(r"\\n", ""));
   //var convertedDatatoJson = response.body.replaceAll(r"\\n", "");

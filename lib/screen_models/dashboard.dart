@@ -11,14 +11,11 @@ import 'package:bbills/screen_models/payment.dart';
 import 'package:bbills/screen_models/reciept.dart';
 import 'package:bbills/screen_models/sales.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 //import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:marquee/marquee.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import '../toast_messeger.dart';
 import 'add_screens/add_s_bill.dart';
 import 'all_payables.dart';
@@ -36,7 +33,8 @@ class _DashboardState extends State<Dashboard> {
 //scroll controller
   ScrollController _scrollcontroller = new ScrollController();
 
-  late var newVersion = NewVersion();
+  late var newVersion = NewVersion(
+  );
 
   late List<_ChartData> data;
   bool ispub = false;

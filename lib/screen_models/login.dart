@@ -1,8 +1,6 @@
-import 'dart:convert';
 import 'package:bbills/app_constants/api_constants.dart';
 import 'package:bbills/screen_models/register.dart';
 import 'package:bbills/shared%20preference%20singleton.dart';
-import 'package:http/http.dart' as http;
 import 'package:bbills/api_models/api_common.dart';
 import 'package:bbills/app_constants/ui_constants.dart';
 import 'package:flutter/material.dart';

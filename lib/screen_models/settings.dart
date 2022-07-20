@@ -1,21 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
-import 'dart:math' as math;
 import '../shared preference singleton.dart';
 import 'package:bbills/api_models/api_common.dart';
 import 'package:bbills/app_constants/ui_constants.dart';
 import 'package:bbills/screen_models/about.dart';
-import 'package:bbills/screen_models/category.dart';
 import 'package:bbills/screen_models/dashboard.dart';
-import 'package:bbills/screen_models/reports_screen/gst_reports_type_view.dart';
-import 'package:bbills/screen_models/reports_screen/sales_purchase_ledger_view.dart';
 import 'package:bbills/screen_models/visit_cards.dart';
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -86,29 +79,27 @@ class _Settings_ScreenState extends State<Settings_Screen>
       source: ImageSource.gallery,
       imageQuality: 100,
     );
-    if (image != null) {
-      croppedFile = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatioPresets: [
-            CropAspectRatioPreset.square,
-            CropAspectRatioPreset.ratio3x2,
-            CropAspectRatioPreset.original,
-            CropAspectRatioPreset.ratio4x3,
-            CropAspectRatioPreset.ratio16x9
-          ],
-          androidUiSettings: AndroidUiSettings(
-              toolbarTitle: 'Set Logo Size',
-              toolbarColor: AppBarColor,
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false),
-          iosUiSettings: IOSUiSettings(
-            minimumAspectRatio: 1.0,
-          ));
-      setState(() {
-        _imagelogo = croppedFile;
-      });
-    }
+    croppedFile = await ImageCropper.cropImage(
+        sourcePath: image.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ],
+        androidUiSettings: AndroidUiSettings(
+            toolbarTitle: 'Set Logo Size',
+            toolbarColor: AppBarColor,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        iosUiSettings: IOSUiSettings(
+          minimumAspectRatio: 1.0,
+        ));
+    setState(() {
+      _imagelogo = croppedFile;
+    });
   }
 
   File? _imageSign;
@@ -118,24 +109,22 @@ class _Settings_ScreenState extends State<Settings_Screen>
       source: ImageSource.gallery,
       imageQuality: 100,
     );
-    if (image != null) {
-      croppedFile2 = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatioPresets: [CropAspectRatioPreset.ratio16x9],
-          androidUiSettings: AndroidUiSettings(
-              hideBottomControls: true,
-              toolbarTitle: 'Set Signature Size',
-              toolbarColor: AppBarColor,
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: true),
-          iosUiSettings: IOSUiSettings(
-            minimumAspectRatio: 1.0,
-          ));
-      setState(() {
-        _imageSign = croppedFile2;
-      });
-    }
+    croppedFile2 = await ImageCropper.cropImage(
+        sourcePath: image.path,
+        aspectRatioPresets: [CropAspectRatioPreset.ratio16x9],
+        androidUiSettings: AndroidUiSettings(
+            hideBottomControls: true,
+            toolbarTitle: 'Set Signature Size',
+            toolbarColor: AppBarColor,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: true),
+        iosUiSettings: IOSUiSettings(
+          minimumAspectRatio: 1.0,
+        ));
+    setState(() {
+      _imageSign = croppedFile2;
+    });
   }
 
   @override

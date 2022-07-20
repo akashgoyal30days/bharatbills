@@ -1,6 +1,7 @@
+import 'dart:developer';
+
 import 'package:bbills/app_constants/api_constants.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../shared preference singleton.dart';
@@ -64,11 +65,13 @@ Future gbill(String package, String url, FormData fromfile) async {
   };
   //debugPrint(fromfile.fields.toString());
   Response response = await dio.post(
+    
     "https://" + baseurl + "/" + suburl + package + '/' + url,
     data: fromfile,
     onSendProgress: (received, total) {
       if (total != -1) {
-        //debugPrint((received / total * 100).toStringAsFixed(0) + '%');
+
+
       }
     },
   );

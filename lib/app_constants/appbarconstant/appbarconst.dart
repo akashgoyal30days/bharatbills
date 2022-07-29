@@ -1,9 +1,6 @@
 import 'package:bbills/api_models/api_common.dart';
-import 'package:bbills/screen_models/account_details.dart';
 import 'package:bbills/screen_models/dashboard.dart';
 import 'package:bbills/screen_models/login.dart';
-import 'package:bbills/screen_models/sales.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -329,7 +326,7 @@ class _ConstAppBarState extends State<ConstAppBar> {
                               child: new Text(item),
                               value: compdblist[compname.indexOf(item)],
                             );
-                          })?.toList() ??
+                          }).toList() ??
                           [],
                       hint: Padding(
                         padding: const EdgeInsets.only(left: 5),

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 //Color AppBarColor = Color(0xff001540);
 Color AppBarColor = Color(0xff0042B7);
 Color ActiveButtonColor = Colors.blue;
-Color bodyColor= Colors.grey.withOpacity(0.2);
-Color scaffoldbackground =  Color(0xff001540);
+Color bodyColor = Colors.grey.withOpacity(0.2);
+Color scaffoldbackground = Color(0xff001540);
 
 //transaction colors
 //Color TRANSBACK = Color(0xff667C3E).withOpacity(0.6);
@@ -36,7 +36,6 @@ String loginfailed = "Login failed";
 
 //main appcode
 String Appname = "Bharat Bills";
-
 
 //login screen
 final Color scaffoldbgcolor = Colors.white;

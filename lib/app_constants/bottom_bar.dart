@@ -1,36 +1,25 @@
 import 'package:bbills/app_constants/reports/reports_screen.dart';
 import 'package:bbills/app_constants/ui_constants.dart';
-import 'package:bbills/screen_models/account_details.dart';
-import 'package:bbills/screen_models/add_screens/add_stock_transf.dart';
 import 'package:bbills/screen_models/all_customer.dart';
-import 'package:bbills/screen_models/all_payables.dart';
 import 'package:bbills/screen_models/all_product.dart';
-import 'package:bbills/screen_models/all_recieveables.dart';
 import 'package:bbills/screen_models/all_suppliers.dart';
 import 'package:bbills/screen_models/cash_bank_book.dart';
 import 'package:bbills/screen_models/category.dart';
-import 'package:bbills/screen_models/company_logo.dart';
 import 'package:bbills/screen_models/dashboard.dart';
 import 'package:bbills/screen_models/delivery_challan.dart';
-import 'package:bbills/screen_models/income_expense.dart';
 import 'package:bbills/screen_models/list_purchase_return.dart';
 import 'package:bbills/screen_models/list_sale_return.dart';
 import 'package:bbills/screen_models/payment.dart';
 import 'package:bbills/screen_models/purchase.dart';
 import 'package:bbills/screen_models/reciept.dart';
-import 'package:bbills/screen_models/sale_return.dart';
 import 'package:bbills/screen_models/sales.dart';
 import 'package:bbills/screen_models/settings.dart';
 import 'package:bbills/screen_models/stock_transfer.dart';
 import 'package:bbills/screen_models/warehouse.dart';
-import 'package:blurrycontainer/blurrycontainer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:overlay_support/overlay_support.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:popover/popover.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class BottomBar extends StatefulWidget {
   BottomBar({required this.lastscreen});

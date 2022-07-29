@@ -1,6 +1,5 @@
 import 'package:bbills/api_models/api_common.dart';
 import 'package:bbills/app_constants/ui_constants.dart';
-import 'package:bbills/screen_models/category.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

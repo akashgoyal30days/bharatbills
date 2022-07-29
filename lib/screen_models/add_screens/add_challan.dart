@@ -1,30 +1,21 @@
 import 'package:bbills/api_models/api_common.dart';
 import 'package:bbills/app_constants/ui_constants.dart';
-import 'package:bbills/app_constants/ui_constants.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../shared preference singleton.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_contacts/contact.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:math' as math;
 import '../../bbills_functional_const.dart';
 import '../../main.dart';
 import '../../toast_messeger.dart';
-import '../all_customer.dart';
-import '../all_suppliers.dart';
 import 'package:dio/dio.dart';
 import 'package:bbills/app_constants/api_constants.dart';
 
 import '../delivery_challan.dart';
-import '../purchase.dart';
-import '../sales.dart';
 
 class AddDelivChallan extends StatefulWidget {
   @override
@@ -204,7 +195,7 @@ class _AddDelivChallanState extends State<AddDelivChallan> {
           showPrintedMessage(context, "Failed", "Item not added", Colors.white,Colors.redAccent, Icons.info, true, "bottom");
         }
       }
-    }catch(error, stacktrace){
+    }catch(error){
       setState(() {
         showbill_loader=false;
       });
@@ -880,7 +871,7 @@ class _AddDelivChallanState extends State<AddDelivChallan> {
                 //debugPrint(contact!.phones.first.number.toString());
                 if (contact!.phones.first.number.toString() !=
                     'Bad state: No element') {
-                  selectednumber.add(contact!.phones.first.number.toString());
+                  selectednumber.add(contact.phones.first.number.toString());
                   contacttype.add('Phonebook');
                 }
                 //debugPrint(selectednumber.toString());
@@ -2114,12 +2105,12 @@ class _AddDelivChallanState extends State<AddDelivChallan> {
                                                                                   //elevation: 5,
                                                                                   style: TextStyle(color: AppBarColor),
                                                                                   iconEnabledColor:AppBarColor,
-                                                                                  items: series?.map((item) {
+                                                                                  items: series.map((item) {
                                                                                     return new DropdownMenuItem(
                                                                                       child: new Text(item['sname'].toString(),style: TextStyle(fontSize: 18, color: AppBarColor),),
                                                                                       value: item['id'].toString(),
                                                                                     );
-                                                                                  })?.toList() ??
+                                                                                  }).toList() ??
                                                                                       [],
 
                                                                                   hint:Padding(
@@ -3378,12 +3369,12 @@ class _AddDelivChallanState extends State<AddDelivChallan> {
                                                                     //elevation: 5,
                                                                     style: TextStyle(color: AppBarColor),
                                                                     iconEnabledColor:AppBarColor,
-                                                                    items: series?.map((item) {
+                                                                    items: series.map((item) {
                                                                       return new DropdownMenuItem(
                                                                         child: new Text(item['sname'].toString(),style: TextStyle(fontSize: 18, color: AppBarColor),),
                                                                         value: item['id'].toString(),
                                                                       );
-                                                                    })?.toList() ??
+                                                                    }).toList() ??
                                                                         [],
 
                                                                     hint:Padding(
@@ -4412,7 +4403,7 @@ class _AddDelivChallanState extends State<AddDelivChallan> {
                                             child: new Text(item['state_name'],style: TextStyle(fontSize: 18, color: AppBarColor),),
                                             value: item['state_name'].toString(),
                                           );
-                                        })?.toList() ??
+                                        }).toList() ??
                                             [],
                                         hint:Padding(
                                           padding: const EdgeInsets.only(left: 5),
@@ -6906,12 +6897,12 @@ class _AddDelivChallanState extends State<AddDelivChallan> {
                                                             //elevation: 5,
                                                             style: TextStyle(color: AppBarColor),
                                                             iconEnabledColor:AppBarColor,
-                                                            items: uoms?.map((item) {
+                                                            items: uoms.map((item) {
                                                               return new DropdownMenuItem(
                                                                 child: new Text(item['name'],style: TextStyle(fontSize: 15, color: AppBarColor),),
                                                                 value: item['code'].toString(),
                                                               );
-                                                            })?.toList() ??
+                                                            }).toList() ??
                                                                 [],
                                                             hint:Padding(
                                                               padding: const EdgeInsets.only(left: 5),
@@ -7162,12 +7153,12 @@ class _AddDelivChallanState extends State<AddDelivChallan> {
                                                             //elevation: 5,
                                                             style: TextStyle(color: AppBarColor),
                                                             iconEnabledColor:AppBarColor,
-                                                            items: gstperlist1?.map((item) {
+                                                            items: gstperlist1.map((item) {
                                                               return new DropdownMenuItem(
                                                                 child: new Text(item['gst']+" "+ "%",style: TextStyle(fontSize: 18, color: AppBarColor),),
                                                                 value: item['gst'].toString(),
                                                               );
-                                                            })?.toList() ??
+                                                            }).toList() ??
                                                                 [],
 
                                                             hint:Padding(
@@ -7444,12 +7435,12 @@ class _AddDelivChallanState extends State<AddDelivChallan> {
                                                         //elevation: 5,
                                                         style: TextStyle(color: AppBarColor),
                                                         iconEnabledColor:AppBarColor,
-                                                        items: Catlist?.map((item) {
+                                                        items: Catlist.map((item) {
                                                           return new DropdownMenuItem(
                                                             child: new Text(item['name'],style: TextStyle(fontSize: 18, color: AppBarColor),),
                                                             value: item['cat_id'].toString(),
                                                           );
-                                                        })?.toList() ??
+                                                        }).toList() ??
                                                             [],
                                                         hint:Padding(
                                                           padding: const EdgeInsets.only(left: 5),

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bbills/api_models/api_common.dart';
 import 'package:bbills/app_constants/appbarconstant/appbarconst.dart';
 import 'package:bbills/app_constants/bottom_bar.dart';
@@ -912,7 +910,7 @@ class _Accnt_DetailsState extends State<Accnt_Details> {
                                               value:
                                                   item['state_name'].toString(),
                                             );
-                                          })?.toList() ??
+                                          }).toList() ??
                                           [],
                                       hint: Padding(
                                         padding: const EdgeInsets.only(left: 5),
@@ -983,7 +981,7 @@ class _Accnt_DetailsState extends State<Accnt_Details> {
                                               ),
                                               value: item['value'].toString(),
                                             );
-                                          })?.toList() ??
+                                          }).toList() ??
                                           [],
                                       hint: Padding(
                                         padding: const EdgeInsets.only(left: 5),

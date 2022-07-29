@@ -1,6 +1,5 @@
 import 'package:bbills/api_models/api_common.dart';
 import 'package:bbills/app_constants/ui_constants.dart';
-import 'package:bbills/app_constants/ui_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,9 +7,7 @@ import 'package:page_transition/page_transition.dart';
 
 import '../../main.dart';
 import '../../toast_messeger.dart';
-import '../all_customer.dart';
 import '../all_product.dart';
-import '../all_suppliers.dart';
 
 
 enum UomRate { uom1rate, uom2rate,}
@@ -331,12 +328,12 @@ class _AddProductState extends State<AddProduct> {
                                     //elevation: 5,
                                     style: TextStyle(color: AppBarColor),
                                     iconEnabledColor:AppBarColor,
-                                    items: Catlist?.map((item) {
+                                    items: Catlist.map((item) {
                                       return new DropdownMenuItem(
                                         child: new Text(item['name'],style: TextStyle(fontSize: 18, color: AppBarColor),),
                                         value: item['cat_id'].toString(),
                                       );
-                                    })?.toList() ??
+                                    }).toList() ??
                                         [],
                                     hint:Padding(
                                       padding: const EdgeInsets.only(left: 5),
@@ -477,12 +474,12 @@ class _AddProductState extends State<AddProduct> {
                                     //elevation: 5,
                                     style: TextStyle(color: AppBarColor),
                                     iconEnabledColor:AppBarColor,
-                                    items: gstperlist?.map((item) {
+                                    items: gstperlist.map((item) {
                                       return new DropdownMenuItem(
                                         child: new Text(item['gst']+" "+ "%",style: TextStyle(fontSize: 18, color: AppBarColor),),
                                         value: item['gst'].toString(),
                                       );
-                                    })?.toList() ??
+                                    }).toList() ??
                                         [],
                                     hint:Padding(
                                       padding: const EdgeInsets.only(left: 5),
@@ -635,12 +632,12 @@ class _AddProductState extends State<AddProduct> {
                                       //elevation: 5,
                                       style: TextStyle(color: AppBarColor),
                                       iconEnabledColor:AppBarColor,
-                                      items: uoms?.map((item) {
+                                      items: uoms.map((item) {
                                         return new DropdownMenuItem(
                                           child: new Text(item['name'],style: TextStyle(fontSize: 18, color: AppBarColor),),
                                           value: item['code'].toString(),
                                         );
-                                      })?.toList() ??
+                                      }).toList() ??
                                           [],
                                       hint:Padding(
                                         padding: const EdgeInsets.only(left: 5),
@@ -696,12 +693,12 @@ class _AddProductState extends State<AddProduct> {
                                       //elevation: 5,
                                       style: TextStyle(color: AppBarColor),
                                       iconEnabledColor:AppBarColor,
-                                      items: uoms?.map((item) {
+                                      items: uoms.map((item) {
                                         return new DropdownMenuItem(
                                           child: new Text(item['name'],style: TextStyle(fontSize: 18, color: AppBarColor),),
                                           value: item['code'].toString(),
                                         );
-                                      })?.toList() ??
+                                      }).toList() ??
                                           [],
                                       hint:Padding(
                                         padding: const EdgeInsets.only(left: 5),

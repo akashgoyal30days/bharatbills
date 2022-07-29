@@ -1,10 +1,8 @@
 import 'package:bbills/api_models/api_common.dart';
 import 'package:bbills/app_constants/ui_constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import '../main.dart';
-import '../shared preference singleton.dart';
 import '../toast_messeger.dart';
 import 'login.dart';
 

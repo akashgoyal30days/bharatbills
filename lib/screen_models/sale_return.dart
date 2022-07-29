@@ -1,12 +1,6 @@
-import 'dart:async';
-import 'dart:convert';
-
 import 'package:bbills/api_models/api_common.dart';
-import 'package:bbills/api_models/webview_api.dart';
 import 'package:bbills/app_constants/api_constants.dart';
 import 'package:bbills/app_constants/appbarconstant/appbarconst.dart';
-import 'package:bbills/app_constants/bottom_bar.dart';
-import 'package:bbills/app_constants/reports/reports_screen.dart';
 import '../shared preference singleton.dart';
 import 'package:bbills/app_constants/ui_constants.dart';
 import 'package:dio/dio.dart';
@@ -16,13 +10,9 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:zoom_widget/zoom_widget.dart';
 
 import '../../main.dart';
 import '../../toast_messeger.dart';
-import 'dashboard.dart';
 import 'list_sale_return.dart';
 
 class SaleReturn extends StatefulWidget {
@@ -337,7 +327,7 @@ class _SaleReturnState extends State<SaleReturn> {
               Colors.redAccent, Icons.info, true, "bottom");
         }
       }
-    } catch (error, stacktrace) {
+    } catch (error) {
       setState(() {
         showloader = false;
       });
@@ -674,9 +664,7 @@ class _SaleReturnState extends State<SaleReturn> {
                                                   elevation: 0,
                                                   color: Colors.green,
                                                   onPressed: () {
-                                                    if (selectedbillid ==
-                                                            null ||
-                                                        selectedbillid == '') {
+                                                    if (selectedbillid == '') {
                                                       showPrintedMessage(
                                                           context,
                                                           "Error",
@@ -885,29 +873,25 @@ class _SaleReturnState extends State<SaleReturn> {
                                                         padding:
                                                             const EdgeInsets
                                                                 .all(8.0),
-                                                        child: selecteddate ==
-                                                                    '' ||
-                                                                selecteddate ==
-                                                                    null
-                                                            ? Text(
-                                                                'Credit note date *',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400),
-                                                              )
-                                                            : Text(
-                                                                selecteddate
-                                                                    .toString(),
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400),
-                                                              ),
+                                                        child:
+                                                            selecteddate == ''
+                                                                ? Text(
+                                                                    'Credit note date *',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            15,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
+                                                                  )
+                                                                : Text(
+                                                                    selecteddate
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            15,
+                                                                        fontWeight:
+                                                                            FontWeight.w400),
+                                                                  ),
                                                       ),
                                                     ),
                                                   ),
@@ -966,7 +950,7 @@ class _SaleReturnState extends State<SaleReturn> {
                                                                       AppBarColor),
                                                               iconEnabledColor:
                                                                   AppBarColor,
-                                                              items: series?.map(
+                                                              items: series.map(
                                                                       (item) {
                                                                     return new DropdownMenuItem(
                                                                       child:
@@ -983,7 +967,7 @@ class _SaleReturnState extends State<SaleReturn> {
                                                                               'id']
                                                                           .toString(),
                                                                     );
-                                                                  })?.toList() ??
+                                                                  }).toList() ??
                                                                   [],
 
                                                               hint: Padding(
@@ -1724,8 +1708,7 @@ class _SaleReturnState extends State<SaleReturn> {
                             onPressed: () {
                               if (seriesid == "manual") {
                                 if (cnotenumberController.text.isNotEmpty &&
-                                    selecteddate != '' &&
-                                    selecteddate != null) {
+                                    selecteddate != '') {
                                   save_Bill();
                                 } else {
                                   showPrintedMessage(
@@ -1739,8 +1722,7 @@ class _SaleReturnState extends State<SaleReturn> {
                                       "top");
                                 }
                               } else {
-                                if (selecteddate != '' &&
-                                    selecteddate != null) {
+                                if (selecteddate != '') {
                                   save_Bill();
                                 } else {
                                   showPrintedMessage(

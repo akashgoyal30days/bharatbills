@@ -4,7 +4,6 @@ import 'package:bbills/app_constants/bottom_bar.dart';
 import 'package:bbills/app_constants/ui_constants.dart';
 import 'package:bbills/screen_models/settings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import '../shared preference singleton.dart';
@@ -29,12 +28,8 @@ class _Add_BankState extends State<Add_Bank> {
   dynamic ifscController = TextEditingController();
   dynamic branchController = TextEditingController();
 
-
-
-
-
   @override
-  void initState(){
+  void initState() {
     super.initState();
     setscreenposition();
   }
@@ -46,20 +41,21 @@ class _Add_BankState extends State<Add_Bank> {
     //getdata();
     getdata();
   }
-  void getdata () async{
+
+  void getdata() async {
     setState(() {
       showloader = true;
     });
-    try{
+    try {
       var rsp = await apiurl("/member/process", "firm.php", {
         "type": "view_bank",
       });
       //debugPrint(rsp.toString());
-      if(rsp.containsKey('status')){
+      if (rsp.containsKey('status')) {
         setState(() {
-          showloader=false;
+          showloader = false;
         });
-        if(rsp['status'].toString()=="true"){
+        if (rsp['status'].toString() == "true") {
           setState(() {
             allbank = rsp['data'];
             banknameController.text = rsp['data']['bank'].toString();
@@ -67,36 +63,40 @@ class _Add_BankState extends State<Add_Bank> {
             accnoController.text = rsp['data']['acc_no'].toString();
             ifscController.text = rsp['data']['ifsc'].toString();
             branchController.text = rsp['data']['branch'].toString();
-
           });
-
-        }else if(rsp['status'].toString()=="false"){  setState(() {
-          showloader=false;
-        });
-        if(rsp['error'].toString()=="invalid_auth"){
-          Navigator.of(context).popUntil((route) => route.isFirst);
-          showPrintedMessage(context, "Error", "Session expired", Colors.white,Colors.redAccent, Icons.info, true, "bottom");
-          Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.fade, child: MyHomePage()));
-        }
-
+        } else if (rsp['status'].toString() == "false") {
+          setState(() {
+            showloader = false;
+          });
+          if (rsp['error'].toString() == "invalid_auth") {
+            Navigator.of(context).popUntil((route) => route.isFirst);
+            showPrintedMessage(context, "Error", "Session expired",
+                Colors.white, Colors.redAccent, Icons.info, true, "bottom");
+            Navigator.pushReplacement(
+                context,
+                PageTransition(
+                    type: PageTransitionType.fade, child: MyHomePage()));
+          }
         }
       }
-    }catch(error){
+    } catch (error) {
       setState(() {
-        showloader=false;
+        showloader = false;
       });
       setState(() {
-        showloader=false;
+        showloader = false;
       });
-      showPrintedMessage(context, "Error", error.toString(), Colors.white,Colors.blueAccent, Icons.info, true, "bottom");
+      showPrintedMessage(context, "Error", error.toString(), Colors.white,
+          Colors.blueAccent, Icons.info, true, "bottom");
       //debugPrint(error.toString());
     }
   }
-  void updateTerm (String id) async{
-    setState((){
+
+  void updateTerm(String id) async {
+    setState(() {
       showloader = true;
     });
-    try{
+    try {
       var rsp = await apiurl("/member/process", "firm.php", {
         "type": "update_bank",
         "payee": payeenameController.text.toString(),
@@ -107,69 +107,62 @@ class _Add_BankState extends State<Add_Bank> {
         "id": id,
       });
       //debugPrint(rsp.toString());
-      if(rsp.containsKey('status')){
+      if (rsp.containsKey('status')) {
         setState(() {
-          showloader=false;
+          showloader = false;
         });
         getdata();
-        if(rsp['status'].toString()=="true"){
-          showPrintedMessage(context, "Success", "Updated Successfully", Colors.white,Colors.green, Icons.info, true, "top");
+        if (rsp['status'].toString() == "true") {
+          showPrintedMessage(context, "Success", "Updated Successfully",
+              Colors.white, Colors.green, Icons.info, true, "top");
           getdata();
-        }else if(rsp['status'].toString()=="false"){  setState(() {
-          showloader=false;
-          showPrintedMessage(context, "Failed", "Failed to Update", Colors.white,Colors.redAccent, Icons.info, true, "top");
-        });
-        if(rsp['error'].toString()=="invalid_auth"){
-          Navigator.of(context).popUntil((route) => route.isFirst);
-          showPrintedMessage(context, "Error", "Session expired", Colors.white,Colors.redAccent, Icons.info, true, "bottom");
-          Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.fade, child: MyHomePage()));
-        }
-
+        } else if (rsp['status'].toString() == "false") {
+          setState(() {
+            showloader = false;
+            showPrintedMessage(context, "Failed", "Failed to Update",
+                Colors.white, Colors.redAccent, Icons.info, true, "top");
+          });
+          if (rsp['error'].toString() == "invalid_auth") {
+            Navigator.of(context).popUntil((route) => route.isFirst);
+            showPrintedMessage(context, "Error", "Session expired",
+                Colors.white, Colors.redAccent, Icons.info, true, "bottom");
+            Navigator.pushReplacement(
+                context,
+                PageTransition(
+                    type: PageTransitionType.fade, child: MyHomePage()));
+          }
         }
       }
-    }catch(error){
+    } catch (error) {
       setState(() {
-        showloader=false;
+        showloader = false;
       });
       getdata();
       setState(() {
-        showloader=false;
+        showloader = false;
       });
-      showPrintedMessage(context, "Error", error.toString(), Colors.white,Colors.blueAccent, Icons.info, true, "bottom");
+      showPrintedMessage(context, "Error", error.toString(), Colors.white,
+          Colors.blueAccent, Icons.info, true, "bottom");
       //debugPrint(error.toString());
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async{
-        Navigator.of(context)
-            .popUntil((route) =>
-        route.isFirst);
-        Navigator
-            .pushReplacement(
+      onWillPop: () async {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        Navigator.pushReplacement(
             context,
             PageTransition(
-                type: PageTransitionType
-                    .fade,
-                child: Settings_Screen()));
+                type: PageTransitionType.fade, child: Settings_Screen()));
         return false;
       },
       child: Scaffold(
-
           backgroundColor: Colors.white,
           body: Container(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
             child: Stack(
               children: [
                 Column(
@@ -177,10 +170,7 @@ class _Add_BankState extends State<Add_Bank> {
                     ConstAppBar(),
                     Container(
                       height: 35,
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
+                      width: MediaQuery.of(context).size.width,
                       color: AppBarColor,
                       child: Row(
                         children: [
@@ -189,12 +179,18 @@ class _Add_BankState extends State<Add_Bank> {
                             child: Row(
                               children: [
                                 Icon(
-                                  Icons.circle, color: Colors.white, size: 15,),
-                                SizedBox(width: 10,),
+                                  Icons.circle,
+                                  color: Colors.white,
+                                  size: 15,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
                                 Text(
-                                  'Add Bank', style: GoogleFonts.poppins(
-                                    fontSize: 15, color: Colors.white
-                                ),),
+                                  'Add Bank',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 15, color: Colors.white),
+                                ),
                               ],
                             ),
                           ),
@@ -204,340 +200,482 @@ class _Add_BankState extends State<Add_Bank> {
 
                     Expanded(
                       child: Container(
-                        height: MediaQuery.of(context).size.height-140,
+                        height: MediaQuery.of(context).size.height - 140,
                         width: MediaQuery.of(context).size.width,
                         color: Colors.white,
-                        child: showloader==true?Container(
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              strokeWidth: 0.7,
-
-                            ),
-                          ),
-                        ):Container(
-                          height: MediaQuery.of(context).size.height,
-                          child: Container(
-                            height: MediaQuery.of(context).size.height-180,
-                            child: ListView(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10, bottom: 2, top: 10),
-                                  child: Row(
+                        child: showloader == true
+                            ? Container(
+                                child: Center(
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 0.7,
+                                  ),
+                                ),
+                              )
+                            : Container(
+                                height: MediaQuery.of(context).size.height,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height - 180,
+                                  child: ListView(
                                     children: [
-                                      Text('Bank Name', style: GoogleFonts.poppins(
-                                          fontSize: 15, fontWeight: FontWeight.w500
-                                      ),),
-                                      Text('', style: GoogleFonts.poppins(
-                                          fontSize: 14, fontWeight: FontWeight.w500, color: Colors.red
-                                      ),),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 10, bottom: 2, top: 10),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'Bank Name',
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Text(
+                                              '',
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.red),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 10, 10, 8),
+                                        child: Container(
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.rectangle,
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(5.0),
+                                                  topLeft: Radius.circular(5.0),
+                                                  bottomLeft:
+                                                      Radius.circular(5.0),
+                                                  bottomRight:
+                                                      Radius.circular(5.0))),
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                10, 0, 10, 0),
+                                            child: TextFormField(
+                                              onChanged: (v) {},
+                                              decoration: new InputDecoration(
+                                                prefixIcon: Icon(
+                                                  Icons.ballot_outlined,
+                                                  color: Colors.grey
+                                                      .withOpacity(0.9),
+                                                  size: 25,
+                                                ),
+                                                isDense: true,
+                                                floatingLabelBehavior:
+                                                    FloatingLabelBehavior.never,
+                                                labelText: "Bank Name",
+                                                fillColor: Colors.white
+                                                    .withOpacity(0.5),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.3),
+                                                    width: 1.0,
+                                                  ),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.3),
+                                                    width: 1.0,
+                                                  ),
+                                                ),
+                                                //fillColor: Colors.green
+                                              ),
+                                              controller: banknameController,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 10, bottom: 2, top: 10),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'Payee Name',
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Text(
+                                              '',
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.red),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 10, 10, 8),
+                                        child: Container(
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.rectangle,
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(5.0),
+                                                  topLeft: Radius.circular(5.0),
+                                                  bottomLeft:
+                                                      Radius.circular(5.0),
+                                                  bottomRight:
+                                                      Radius.circular(5.0))),
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                10, 0, 10, 0),
+                                            child: TextFormField(
+                                              onChanged: (v) {},
+                                              decoration: new InputDecoration(
+                                                prefixIcon: Icon(
+                                                  Icons.ballot_outlined,
+                                                  color: Colors.grey
+                                                      .withOpacity(0.9),
+                                                  size: 25,
+                                                ),
+                                                isDense: true,
+                                                floatingLabelBehavior:
+                                                    FloatingLabelBehavior.never,
+                                                labelText: "Payee Name",
+                                                fillColor: Colors.white
+                                                    .withOpacity(0.5),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.3),
+                                                    width: 1.0,
+                                                  ),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.3),
+                                                    width: 1.0,
+                                                  ),
+                                                ),
+                                                //fillColor: Colors.green
+                                              ),
+                                              controller: payeenameController,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 10, bottom: 2, top: 10),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'Acc No.',
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Text(
+                                              '',
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.red),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 10, 10, 8),
+                                        child: Container(
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.rectangle,
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(5.0),
+                                                  topLeft: Radius.circular(5.0),
+                                                  bottomLeft:
+                                                      Radius.circular(5.0),
+                                                  bottomRight:
+                                                      Radius.circular(5.0))),
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                10, 0, 10, 0),
+                                            child: TextFormField(
+                                              onChanged: (v) {},
+                                              decoration: new InputDecoration(
+                                                prefixIcon: Icon(
+                                                  Icons.ballot_outlined,
+                                                  color: Colors.grey
+                                                      .withOpacity(0.9),
+                                                  size: 25,
+                                                ),
+                                                isDense: true,
+                                                floatingLabelBehavior:
+                                                    FloatingLabelBehavior.never,
+                                                labelText: "Acc No.",
+                                                fillColor: Colors.white
+                                                    .withOpacity(0.5),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.3),
+                                                    width: 1.0,
+                                                  ),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.3),
+                                                    width: 1.0,
+                                                  ),
+                                                ),
+                                                //fillColor: Colors.green
+                                              ),
+                                              controller: accnoController,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 10, bottom: 2, top: 10),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'IFSC',
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Text(
+                                              '',
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.red),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 10, 10, 8),
+                                        child: Container(
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.rectangle,
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(5.0),
+                                                  topLeft: Radius.circular(5.0),
+                                                  bottomLeft:
+                                                      Radius.circular(5.0),
+                                                  bottomRight:
+                                                      Radius.circular(5.0))),
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                10, 0, 10, 0),
+                                            child: TextFormField(
+                                              onChanged: (v) {},
+                                              decoration: new InputDecoration(
+                                                prefixIcon: Icon(
+                                                  Icons.ballot_outlined,
+                                                  color: Colors.grey
+                                                      .withOpacity(0.9),
+                                                  size: 25,
+                                                ),
+                                                isDense: true,
+                                                floatingLabelBehavior:
+                                                    FloatingLabelBehavior.never,
+                                                labelText: "IFSC",
+                                                fillColor: Colors.white
+                                                    .withOpacity(0.5),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.3),
+                                                    width: 1.0,
+                                                  ),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.3),
+                                                    width: 1.0,
+                                                  ),
+                                                ),
+                                                //fillColor: Colors.green
+                                              ),
+                                              controller: ifscController,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 10, bottom: 2, top: 10),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'Bank Branch',
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Text(
+                                              '',
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.red),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 10, 10, 8),
+                                        child: Container(
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.rectangle,
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(5.0),
+                                                  topLeft: Radius.circular(5.0),
+                                                  bottomLeft:
+                                                      Radius.circular(5.0),
+                                                  bottomRight:
+                                                      Radius.circular(5.0))),
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                10, 0, 10, 0),
+                                            child: TextFormField(
+                                              onChanged: (v) {},
+                                              decoration: new InputDecoration(
+                                                prefixIcon: Icon(
+                                                  Icons.ballot_outlined,
+                                                  color: Colors.grey
+                                                      .withOpacity(0.9),
+                                                  size: 25,
+                                                ),
+                                                isDense: true,
+                                                floatingLabelBehavior:
+                                                    FloatingLabelBehavior.never,
+                                                labelText: "Bank Branch",
+                                                fillColor: Colors.white
+                                                    .withOpacity(0.5),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.3),
+                                                    width: 1.0,
+                                                  ),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.3),
+                                                    width: 1.0,
+                                                  ),
+                                                ),
+                                                //fillColor: Colors.green
+                                              ),
+                                              controller: branchController,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 8),
-                                  child:  Container(
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(5.0),
-                                            topLeft: Radius.circular(5.0),
-                                            bottomLeft: Radius.circular(5.0),
-                                            bottomRight: Radius.circular(5.0))),
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                      child: TextFormField(
-                                        onChanged: (v){
-
-                                        },
-                                        decoration: new InputDecoration(
-                                          prefixIcon: Icon(Icons.ballot_outlined, color: Colors.grey.withOpacity(0.9),size: 25,),
-                                          isDense: true,floatingLabelBehavior: FloatingLabelBehavior.never,
-                                          labelText: "Bank Name",
-                                          fillColor: Colors.white.withOpacity(0.5),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(5.0),
-                                            borderSide: BorderSide(
-                                              color: Colors.grey.withOpacity(0.3),
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(5.0),
-                                            borderSide: BorderSide(
-                                              color: Colors.grey.withOpacity(0.3),
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          //fillColor: Colors.green
-                                        ),
-                                        controller: banknameController,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10, bottom: 2, top: 10),
-                                  child: Row(
-                                    children: [
-                                      Text('Payee Name', style: GoogleFonts.poppins(
-                                          fontSize: 15, fontWeight: FontWeight.w500
-                                      ),),
-                                      Text('', style: GoogleFonts.poppins(
-                                          fontSize: 14, fontWeight: FontWeight.w500, color: Colors.red
-                                      ),),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 8),
-                                  child:  Container(
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(5.0),
-                                            topLeft: Radius.circular(5.0),
-                                            bottomLeft: Radius.circular(5.0),
-                                            bottomRight: Radius.circular(5.0))),
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                      child: TextFormField(
-                                        onChanged: (v){
-
-                                        },
-                                        decoration: new InputDecoration(
-                                          prefixIcon: Icon(Icons.ballot_outlined, color: Colors.grey.withOpacity(0.9),size: 25,),
-                                          isDense: true,floatingLabelBehavior: FloatingLabelBehavior.never,
-                                          labelText: "Payee Name",
-                                          fillColor: Colors.white.withOpacity(0.5),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(5.0),
-                                            borderSide: BorderSide(
-                                              color: Colors.grey.withOpacity(0.3),
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(5.0),
-                                            borderSide: BorderSide(
-                                              color: Colors.grey.withOpacity(0.3),
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          //fillColor: Colors.green
-                                        ),
-                                        controller: payeenameController,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10, bottom: 2, top: 10),
-                                  child: Row(
-                                    children: [
-                                      Text('Acc No.', style: GoogleFonts.poppins(
-                                          fontSize: 15, fontWeight: FontWeight.w500
-                                      ),),
-                                      Text('', style: GoogleFonts.poppins(
-                                          fontSize: 14, fontWeight: FontWeight.w500, color: Colors.red
-                                      ),),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 8),
-                                  child:  Container(
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(5.0),
-                                            topLeft: Radius.circular(5.0),
-                                            bottomLeft: Radius.circular(5.0),
-                                            bottomRight: Radius.circular(5.0))),
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                      child: TextFormField(
-                                        onChanged: (v){
-
-                                        },
-                                        decoration: new InputDecoration(
-                                          prefixIcon: Icon(Icons.ballot_outlined, color: Colors.grey.withOpacity(0.9),size: 25,),
-                                          isDense: true,floatingLabelBehavior: FloatingLabelBehavior.never,
-                                          labelText: "Acc No.",
-                                          fillColor: Colors.white.withOpacity(0.5),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(5.0),
-                                            borderSide: BorderSide(
-                                              color: Colors.grey.withOpacity(0.3),
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(5.0),
-                                            borderSide: BorderSide(
-                                              color: Colors.grey.withOpacity(0.3),
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          //fillColor: Colors.green
-                                        ),
-                                        controller: accnoController,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10, bottom: 2, top: 10),
-                                  child: Row(
-                                    children: [
-                                      Text('IFSC', style: GoogleFonts.poppins(
-                                          fontSize: 15, fontWeight: FontWeight.w500
-                                      ),),
-                                      Text('', style: GoogleFonts.poppins(
-                                          fontSize: 14, fontWeight: FontWeight.w500, color: Colors.red
-                                      ),),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 8),
-                                  child:  Container(
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(5.0),
-                                            topLeft: Radius.circular(5.0),
-                                            bottomLeft: Radius.circular(5.0),
-                                            bottomRight: Radius.circular(5.0))),
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                      child: TextFormField(
-                                        onChanged: (v){
-
-                                        },
-                                        decoration: new InputDecoration(
-                                          prefixIcon: Icon(Icons.ballot_outlined, color: Colors.grey.withOpacity(0.9),size: 25,),
-                                          isDense: true,floatingLabelBehavior: FloatingLabelBehavior.never,
-                                          labelText: "IFSC",
-                                          fillColor: Colors.white.withOpacity(0.5),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(5.0),
-                                            borderSide: BorderSide(
-                                              color: Colors.grey.withOpacity(0.3),
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(5.0),
-                                            borderSide: BorderSide(
-                                              color: Colors.grey.withOpacity(0.3),
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          //fillColor: Colors.green
-                                        ),
-                                        controller: ifscController,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10, bottom: 2, top: 10),
-                                  child: Row(
-                                    children: [
-                                      Text('Bank Branch', style: GoogleFonts.poppins(
-                                          fontSize: 15, fontWeight: FontWeight.w500
-                                      ),),
-                                      Text('', style: GoogleFonts.poppins(
-                                          fontSize: 14, fontWeight: FontWeight.w500, color: Colors.red
-                                      ),),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 8),
-                                  child:  Container(
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(5.0),
-                                            topLeft: Radius.circular(5.0),
-                                            bottomLeft: Radius.circular(5.0),
-                                            bottomRight: Radius.circular(5.0))),
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                      child: TextFormField(
-                                        onChanged: (v){
-
-                                        },
-                                        decoration: new InputDecoration(
-                                          prefixIcon: Icon(Icons.ballot_outlined, color: Colors.grey.withOpacity(0.9),size: 25,),
-                                          isDense: true,floatingLabelBehavior: FloatingLabelBehavior.never,
-                                          labelText: "Bank Branch",
-                                          fillColor: Colors.white.withOpacity(0.5),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(5.0),
-                                            borderSide: BorderSide(
-                                              color: Colors.grey.withOpacity(0.3),
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(5.0),
-                                            borderSide: BorderSide(
-                                              color: Colors.grey.withOpacity(0.3),
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                          //fillColor: Colors.green
-                                        ),
-                                        controller: branchController,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                          ),
-                        ),
+                              ),
                       ),
                     ),
                     //this button is hidden! don't panic
                     Container(
                       height: 50,
-                      width:  200,
+                      width: 200,
                       child: RaisedButton(
                         elevation: 0,
                         color: AppBarColor,
-                        onPressed: (){
+                        onPressed: () {
                           updateTerm(allbank['id'].toString());
                         },
-                        child: Text('Save Details', style: TextStyle(fontSize:15, color:Colors.white),),
+                        child: Text(
+                          'Save Details',
+                          style: TextStyle(fontSize: 15, color: Colors.white),
+                        ),
                       ),
                     ),
-                    SizedBox(height: 100,)
+                    SizedBox(
+                      height: 100,
+                    )
                   ],
                 ),
                 Positioned(
                   bottom: 2,
                   left: 0,
                   right: 0,
-                  child: BottomBar(lastscreen: "addbank",),
+                  child: BottomBar(
+                    lastscreen: "addbank",
+                  ),
                 ),
               ],
             ),
-          )
-      ),
+          )),
     );
   }
 }

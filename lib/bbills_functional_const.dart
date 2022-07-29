@@ -1,1 +1,2 @@
-bool isphonebook_allowed = false; // enable / disable to fetch contact from phone;
+bool isphonebook_allowed =
+    false; // enable / disable to fetch contact from phone;

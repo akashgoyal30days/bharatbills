@@ -775,7 +775,7 @@ class _AddCustomerState extends State<AddCustomer> {
                                       child: new Text(item['state_name'],style: TextStyle(fontSize: 18, color: AppBarColor),),
                                       value: item['state_name'].toString(),
                                     );
-                                  })?.toList() ??
+                                  }).toList() ??
                                       [],
                                   hint:Padding(
                                     padding: const EdgeInsets.only(left: 5),
@@ -882,7 +882,7 @@ class _AddCustomerState extends State<AddCustomer> {
                                       child: new Text(item['value'],style: TextStyle(fontSize: 18, color: AppBarColor),),
                                       value: item['value'].toString(),
                                     );
-                                  })?.toList() ??
+                                  }).toList() ??
                                       [],
                                   hint:Padding(
                                     padding: const EdgeInsets.only(left: 5),

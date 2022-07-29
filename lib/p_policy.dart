@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:bbills/screen_models/login.dart';
 import 'package:flutter/material.dart';
@@ -90,10 +89,10 @@ class _PpolicyState extends State<Ppolicy> {
                     _webViewController = webViewController;
                     _controller!.complete(webViewController);
                   },
-                  onProgress: (int value) {                   
-                      setState(() {
-                        progress = value;
-                      });
+                  onProgress: (int value) {
+                    setState(() {
+                      progress = value;
+                    });
                     print("WebView is loading (progress : $progress%)");
                   },
                   javascriptChannels: <JavascriptChannel>{

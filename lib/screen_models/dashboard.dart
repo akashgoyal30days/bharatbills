@@ -33,8 +33,7 @@ class _DashboardState extends State<Dashboard> {
 //scroll controller
   ScrollController _scrollcontroller = new ScrollController();
 
-  late var newVersion = NewVersion(
-  );
+  late var newVersion = NewVersion();
 
   late List<_ChartData> data;
   bool ispub = false;

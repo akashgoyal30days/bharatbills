@@ -6,11 +6,9 @@ import 'package:bbills/app_constants/ui_constants.dart';
 import 'package:bbills/screen_models/settings.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import '../shared preference singleton.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
 import '../toast_messeger.dart';
